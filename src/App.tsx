@@ -1,36 +1,28 @@
-import { Stack, List, ListItem, ListItemText, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Stack, Typography } from "@mui/material";
+import Tickers from "./components/Tickers";
 
 const App = () => {
   return (
-    <>
-      <header>header</header>
+    <div style={{ width: "100%", height: "100%" }}>
+      <header>
+        <Typography component="h1" fontSize="2rem" fontWeight="bold">
+          Search & save tickers
+        </Typography>
+        <Typography component="h2" fontSize="1.7rem">
+          Use search to find ticker then save ticker.Simple
+        </Typography>
+      </header>
       <main>
         <Stack direction="row">
-          <section>
+          <section style={{ width: "70%" }}>
             <h1>main content</h1>
           </section>
-          <aside>
-            <h2>Saved tickers</h2>
-            <List>
-              {["btc", "eth", "usdt"].map(coin => (
-                <ListItem
-                  key={coin}
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemText>{coin}</ListItemText>
-                </ListItem>
-              ))}
-            </List>
+          <aside style={{ width: "30%" }}>
+            <Tickers />
           </aside>
         </Stack>
       </main>
-      <footer>footer</footer>
-    </>
+    </div>
   );
 };
 
