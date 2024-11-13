@@ -1,63 +1,29 @@
-import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import {
-  Stack,
-  List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  Button,
-  Typography
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CircularProgress from "@mui/material/CircularProgress";
-import { tickersState } from "@/state/tickers";
-import useGetTickers from "@/hooks/useGetTickers";
+import { Stack, List, Button, Typography } from "@mui/material";
+import Ticker from "./Ticker";
+import { idsState } from "@/state/ids";
 
 const Tickers = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [tickers, setTickers] = useRecoilState(tickersState);
-  const savedTickers = useGetTickers();
-
-  useEffect(() => {
-    if (tickers.length !== savedTickers.length && savedTickers.length) {
-      setTickers(savedTickers);
-    }
-    setLoading(false);
-  }, []);
-
+  const [ids, setIds] = useRecoilState(idsState);
   return (
     <Stack>
       <Typography component="h2" fontSize="1.5rem">
-        Tickers
+        {`Tickers(${ids.length})`}
       </Typography>
-      {isLoading && (
-        <Stack alignItems="center" mt="1rem">
-          <CircularProgress size="2rem" />
-        </Stack>
-      )}
-      {!isLoading && (
-        <>
-          <List>
-            {tickers.map(coin => (
-              <ListItem
-                key={coin}
-                secondaryAction={
-                  <IconButton edge="end" aria-label="delete">
-                    <DeleteIcon color="error" />
-                  </IconButton>
-                }
-              >
-                <ListItemText>{coin}</ListItemText>
-              </ListItem>
-            ))}
-          </List>
-          {!!tickers.length && (
-            <Button variant="outlined" color="error" fullWidth>
-              Delete all
-            </Button>
-          )}
-        </>
+      <List>
+        {ids.map((id) => (
+          <Ticker id={id} key={id} />
+        ))}
+      </List>
+      {!!ids.length && (
+        <Button
+          variant="outlined"
+          color="error"
+          fullWidth
+          onClick={() => setIds([])}
+        >
+          Delete all
+        </Button>
       )}
     </Stack>
   );
