@@ -1,16 +1,24 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, IconButton } from "@mui/material";
+import HelpIcon from "@mui/icons-material/Help";
 import Tickers from "@/components/Tickers";
 
 const App = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <header>
-        <Typography component="h1" fontSize="2rem" fontWeight="bold">
-          Search & save tickers
-        </Typography>
-        <Typography component="h2" fontSize="1.7rem">
-          Use search to find ticker then save ticker.Simple
-        </Typography>
+        <Stack direction="row" alignItems="center">
+          <Typography
+            component="h1"
+            fontSize="2rem"
+            fontWeight="bold"
+            mr="1rem"
+          >
+            Search & save tickers
+          </Typography>
+          <IconButton onClick={() => console.log("placeholder for help")}>
+            <HelpIcon color="primary" />
+          </IconButton>
+        </Stack>
       </header>
       <main>
         <Stack direction="row">
