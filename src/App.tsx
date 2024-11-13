@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import Tickers from "@components/Tickers";
+import Tickers from "@/components/Tickers";
 
 const App = () => {
   return (
