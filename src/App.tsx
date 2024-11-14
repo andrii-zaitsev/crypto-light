@@ -1,5 +1,6 @@
 import { Stack, Typography, IconButton } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
+import SelectedTicker from "./components/SelectedTicker";
 import Tickers from "@/components/Tickers";
 
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
       <main>
         <Stack direction="row">
           <section style={{ width: "70%" }}>
-            <h1>main content</h1>
+            <SelectedTicker />
           </section>
           <aside style={{ width: "30%" }}>
             <Tickers />
