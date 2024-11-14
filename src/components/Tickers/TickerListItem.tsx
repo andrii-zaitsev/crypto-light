@@ -12,7 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import WarningIcon from "@mui/icons-material/Warning";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import { getTicker } from "@/api";
+import getTicker from "@/api/getTicker";
 import Loader from "@/components/Loader";
 import selectedTickerState from "@/state/selectedTicker";
 import tickersState from "@/state/tickers";
@@ -45,7 +45,7 @@ const TickerListItem = ({ ticker }: TickerProps) => {
     );
   }
 
-  if (status === "error") {
+  if (status === "error" || data === undefined) {
     return (
       <ListItem
         secondaryAction={
@@ -62,8 +62,8 @@ const TickerListItem = ({ ticker }: TickerProps) => {
     );
   }
 
-  const percentChange = data ? Number(data["changePercent24Hr"]) : 1;
-  const isGrowth = data && percentChange === Math.abs(percentChange);
+  const percentChange = Number(data.changePercent24Hr);
+  const isGrowth = percentChange === Math.abs(percentChange);
 
   return (
     <ListItem

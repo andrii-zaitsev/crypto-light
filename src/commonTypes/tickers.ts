@@ -17,3 +17,9 @@ export type CryptoAsset = {
   vwap24Hr: string;
   explorer: string;
 };
+
+export type HistoryPoint = {
+  date: string;
+  priceUsd: string;
+  time: number;
+};
