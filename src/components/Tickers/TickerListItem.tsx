@@ -13,20 +13,23 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { getTicker } from "@/api";
 import Loader from "@/components/Loader";
-import { idsState } from "@/state/ids";
+import tickersState from "@/state/tickers";
+import { Ticker } from "@/commonTypes/tickers";
 
 export type TickerProps = {
-  id: string;
+  ticker: Ticker;
 };
 
-const Ticker = ({ id }: TickerProps) => {
-  const setIds = useSetRecoilState(idsState);
+const TickerListItem = ({ ticker }: TickerProps) => {
+  const setTickers = useSetRecoilState(tickersState);
   const deleteId = () =>
-    setIds((prevIds) => prevIds.filter((idItem) => idItem !== id));
+    setTickers((prevTickers) =>
+      prevTickers.filter((tickerItem) => tickerItem.id !== ticker.id)
+    );
 
   const { data, status } = useQuery({
-    queryKey: ["tickerId", id],
-    queryFn: () => getTicker(id)
+    queryKey: ["tickerId", ticker.id],
+    queryFn: () => getTicker(ticker.id)
   });
 
   if (status === "pending") {
@@ -49,7 +52,7 @@ const Ticker = ({ id }: TickerProps) => {
         <ListItemIcon>
           <WarningIcon color="warning" />
         </ListItemIcon>
-        <ListItemText>{`Unable to load ticker for: "${id}"`}</ListItemText>
+        <ListItemText>{`Unable to load data for: "${ticker.value}"`}</ListItemText>
       </ListItem>
     );
   }
@@ -81,4 +84,4 @@ const Ticker = ({ id }: TickerProps) => {
   );
 };
 
-export default Ticker;
+export default TickerListItem;

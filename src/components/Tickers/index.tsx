@@ -1,26 +1,26 @@
 import { useRecoilState } from "recoil";
 import { Stack, List, Button, Typography } from "@mui/material";
-import Ticker from "./Ticker";
-import { idsState } from "@/state/ids";
+import TickerListItem from "./TickerListItem";
+import tickersState from "@/state/tickers";
 
 const Tickers = () => {
-  const [ids, setIds] = useRecoilState(idsState);
+  const [tickers, setTickers] = useRecoilState(tickersState);
   return (
     <Stack>
       <Typography component="h2" fontSize="1.5rem">
-        {`Tickers(${ids.length})`}
+        {`Tickers (${tickers.length})`}
       </Typography>
       <List>
-        {ids.map((id) => (
-          <Ticker id={id} key={id} />
+        {tickers.map((ticker) => (
+          <TickerListItem ticker={ticker} key={ticker.id} />
         ))}
       </List>
-      {!!ids.length && (
+      {!!tickers.length && (
         <Button
           variant="outlined"
           color="error"
           fullWidth
-          onClick={() => setIds([])}
+          onClick={() => setTickers([])}
         >
           Delete all
         </Button>
