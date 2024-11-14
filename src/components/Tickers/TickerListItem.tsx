@@ -1,4 +1,4 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import {
   ListItem,
@@ -7,12 +7,14 @@ import {
   ListItemIcon,
   Typography
 } from "@mui/material";
+import BarChartIcon from "@mui/icons-material/BarChart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import WarningIcon from "@mui/icons-material/Warning";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { getTicker } from "@/api";
 import Loader from "@/components/Loader";
+import selectedTickerState from "@/state/selectedTicker";
 import tickersState from "@/state/tickers";
 import { Ticker } from "@/commonTypes/tickers";
 
@@ -21,6 +23,9 @@ export type TickerProps = {
 };
 
 const TickerListItem = ({ ticker }: TickerProps) => {
+  const [selectedTicker, selectTicker] = useRecoilState(selectedTickerState);
+  const onSelect = () => selectTicker(ticker);
+
   const setTickers = useSetRecoilState(tickersState);
   const deleteId = () =>
     setTickers((prevTickers) =>
@@ -80,6 +85,13 @@ const TickerListItem = ({ ticker }: TickerProps) => {
           {data.symbol}
         </Typography>
       </ListItemText>
+      <ListItemIcon>
+        <IconButton onClick={onSelect}>
+          <BarChartIcon
+            color={selectedTicker.id === ticker.id ? "primary" : "action"}
+          />
+        </IconButton>
+      </ListItemIcon>
     </ListItem>
   );
 };
