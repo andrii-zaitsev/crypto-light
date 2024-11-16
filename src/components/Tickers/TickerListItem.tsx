@@ -2,16 +2,12 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import {
   ListItem,
+  ListItemButton,
   ListItemText,
-  IconButton,
   ListItemIcon,
   Typography
 } from "@mui/material";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import DeleteIcon from "@mui/icons-material/Delete";
 import WarningIcon from "@mui/icons-material/Warning";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import getTicker from "@/api/getTicker";
 import Loader from "@/components/Loader";
 import selectedTickerState from "@/state/selectedTicker";
@@ -41,25 +37,50 @@ const TickerListItem = ({ ticker }: TickerProps) => {
   if (status === "pending") {
     return (
       <ListItem>
-        <Loader />
+        <ListItemIcon>
+          <Loader />
+        </ListItemIcon>
+        <ListItemText>
+          <Typography
+            component="h3"
+            fontWeight="bold"
+            textTransform="uppercase"
+          >
+            {ticker.value}
+          </Typography>
+          <Typography component="h4" color="textDisabled">
+            {"--"}
+          </Typography>
+        </ListItemText>
       </ListItem>
     );
   }
 
   if (status === "error" || data === undefined) {
     return (
-      <ListItem
-        secondaryAction={
-          <IconButton edge="end" aria-label="delete" onClick={deleteId}>
-            <DeleteIcon />
-          </IconButton>
-        }
+      <ListItemButton
+        onClick={onSelect}
+        sx={{
+          backgroundColor: "rgba(178, 36, 74, 0.1)",
+          "&:hover": { backgroundColor: "rgba(178, 36, 74, 0.1)" }
+        }}
       >
         <ListItemIcon>
-          <WarningIcon color="warning" />
+          <WarningIcon color="warning" fontSize="large" />
         </ListItemIcon>
-        <ListItemText>{`Unable to load data for: "${ticker.value}"`}</ListItemText>
-      </ListItem>
+        <ListItemText>
+          <Typography
+            component="h3"
+            fontWeight="bold"
+            textTransform="uppercase"
+          >
+            {ticker.value}
+          </Typography>
+          <Typography component="h4" color="textDisabled">
+            {"--"}
+          </Typography>
+        </ListItemText>
+      </ListItemButton>
     );
   }
 
@@ -67,34 +88,19 @@ const TickerListItem = ({ ticker }: TickerProps) => {
   const isGrowth = percentChange === Math.abs(percentChange);
 
   return (
-    <ListItem
-      secondaryAction={
-        <IconButton edge="end" aria-label="delete" onClick={deleteId}>
-          <DeleteIcon />
-        </IconButton>
-      }
-    >
+    <ListItemButton onClick={onSelect}>
       <ListItemIcon>
-        {isGrowth ? (
-          <TrendingUpIcon color="success" />
-        ) : (
-          <TrendingDownIcon color="error" />
-        )}
+        <TokenIcon symbol={data.symbol} variant="branded" size={40} />
       </ListItemIcon>
-      <TokenIcon symbol={data.symbol} variant="branded" size={40} />
       <ListItemText>
-        <Typography color={isGrowth ? "success" : "error"} ml="1rem">
+        <Typography component="h3" fontWeight="bold" textTransform="uppercase">
           {data.symbol}
         </Typography>
+        <Typography component="h4" color="textDisabled">
+          {data.name}
+        </Typography>
       </ListItemText>
-      <ListItemIcon>
-        <IconButton onClick={onSelect}>
-          <BarChartIcon
-            color={selectedTicker.id === ticker.id ? "primary" : "action"}
-          />
-        </IconButton>
-      </ListItemIcon>
-    </ListItem>
+    </ListItemButton>
   );
 };
 
