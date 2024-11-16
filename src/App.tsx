@@ -1,12 +1,6 @@
 import { useState } from "react";
-import {
-  Stack,
-  Typography,
-  IconButton,
-  Autocomplete,
-  TextField
-} from "@mui/material";
-import HelpIcon from "@mui/icons-material/Help";
+import { Stack, Autocomplete, TextField } from "@mui/material";
+import Headline from "@/components/Headline";
 import SelectedTicker from "./components/SelectedTicker";
 import Tickers from "@/components/Tickers";
 
@@ -15,19 +9,7 @@ const App = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <header>
-        <Stack direction="row" alignItems="center">
-          <Typography
-            component="h1"
-            fontSize="2rem"
-            fontWeight="bold"
-            mr="1rem"
-          >
-            Search & save tickers
-          </Typography>
-          <IconButton onClick={() => console.log("placeholder for help")}>
-            <HelpIcon color="primary" />
-          </IconButton>
-        </Stack>
+        <Headline />
       </header>
       <main>
         <Stack direction="row">
