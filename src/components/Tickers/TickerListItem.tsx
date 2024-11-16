@@ -17,6 +17,7 @@ import Loader from "@/components/Loader";
 import selectedTickerState from "@/state/selectedTicker";
 import tickersState from "@/state/tickers";
 import { Ticker } from "@/commonTypes/tickers";
+import { TokenIcon } from "@web3icons/react";
 
 export type TickerProps = {
   ticker: Ticker;
@@ -80,8 +81,9 @@ const TickerListItem = ({ ticker }: TickerProps) => {
           <TrendingDownIcon color="error" />
         )}
       </ListItemIcon>
+      <TokenIcon symbol={data.symbol} variant="branded" size={40} />
       <ListItemText>
-        <Typography color={isGrowth ? "success" : "error"}>
+        <Typography color={isGrowth ? "success" : "error"} ml="1rem">
           {data.symbol}
         </Typography>
       </ListItemText>
