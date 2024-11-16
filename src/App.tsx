@@ -13,7 +13,7 @@ const App = () => {
       </header>
       <main>
         <Stack direction="row">
-          <section style={{ width: "70%" }}>
+          <aside style={{ width: "30%" }}>
             <Autocomplete
               freeSolo
               id="free-solo-2-demo"
@@ -34,11 +34,11 @@ const App = () => {
                 />
               )}
             />
-            <SelectedTicker />
-          </section>
-          <aside style={{ width: "30%" }}>
             <Tickers />
           </aside>
+          <section style={{ width: "70%" }}>
+            <SelectedTicker />
+          </section>
         </Stack>
       </main>
     </div>
