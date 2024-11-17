@@ -1,17 +1,17 @@
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import {
   ListItem,
   ListItemButton,
   ListItemText,
   ListItemIcon,
-  Typography
+  Typography,
+  Stack
 } from "@mui/material";
 import WarningIcon from "@mui/icons-material/Warning";
 import getTicker from "@/api/getTicker";
 import Loader from "@/components/Loader";
 import selectedTickerState from "@/state/selectedTicker";
-import tickersState from "@/state/tickers";
 import { Ticker } from "@/commonTypes/tickers";
 import { TokenIcon } from "@web3icons/react";
 
@@ -22,12 +22,6 @@ export type TickerProps = {
 const TickerListItem = ({ ticker }: TickerProps) => {
   const [selectedTicker, selectTicker] = useRecoilState(selectedTickerState);
   const onSelect = () => selectTicker(ticker);
-
-  const setTickers = useSetRecoilState(tickersState);
-  const deleteId = () =>
-    setTickers((prevTickers) =>
-      prevTickers.filter((tickerItem) => tickerItem.id !== ticker.id)
-    );
 
   const { data, status } = useQuery({
     queryKey: ["tickerId", ticker.id],
@@ -58,13 +52,7 @@ const TickerListItem = ({ ticker }: TickerProps) => {
 
   if (status === "error" || data === undefined) {
     return (
-      <ListItemButton
-        onClick={onSelect}
-        sx={{
-          backgroundColor: "rgba(178, 36, 74, 0.1)",
-          "&:hover": { backgroundColor: "rgba(178, 36, 74, 0.1)" }
-        }}
-      >
+      <ListItemButton onClick={onSelect}>
         <ListItemIcon>
           <WarningIcon color="warning" fontSize="large" />
         </ListItemIcon>
@@ -88,7 +76,14 @@ const TickerListItem = ({ ticker }: TickerProps) => {
   const isGrowth = percentChange === Math.abs(percentChange);
 
   return (
-    <ListItemButton onClick={onSelect}>
+    <ListItemButton
+      onClick={onSelect}
+      sx={
+        selectedTicker.value === ticker.value
+          ? { backgroundColor: "rgba(0, 0, 0, 0.04)" }
+          : undefined
+      }
+    >
       <ListItemIcon>
         <TokenIcon symbol={data.symbol} variant="branded" size={40} />
       </ListItemIcon>
@@ -100,6 +95,24 @@ const TickerListItem = ({ ticker }: TickerProps) => {
           {data.name}
         </Typography>
       </ListItemText>
+      <Stack alignItems="flex-end">
+        <Typography component="span" fontWeight="bold">
+          {Number(data.priceUsd).toFixed(2)}
+        </Typography>
+        <Typography
+          component="span"
+          sx={{
+            backgroundColor: isGrowth ? "#65c467" : "#eb4e3d",
+            textAlign: "right",
+            color: "white",
+            width: "5rem",
+            borderRadius: "6px",
+            padding: "2px 4px 2px 2px"
+          }}
+        >
+          {`${Number(data.changePercent24Hr).toFixed(3)}%`}
+        </Typography>
+      </Stack>
     </ListItemButton>
   );
 };
