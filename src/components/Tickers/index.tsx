@@ -1,15 +1,15 @@
 import { useRecoilValue } from "recoil";
 import { Stack, List } from "@mui/material";
 import TickerListItem from "./TickerListItem";
-import tickersState from "@/state/tickers";
+import { tickersState } from "@/state/state";
 
 const Tickers = () => {
-  const symbols = useRecoilValue(tickersState);
+  const tickers = useRecoilValue(tickersState);
   return (
     <Stack>
       <List>
-        {symbols.map((symbol) => (
-          <TickerListItem ticker={symbol} key={symbol.id} />
+        {tickers.map((ticker) => (
+          <TickerListItem ticker={ticker} key={ticker.id} />
         ))}
       </List>
     </Stack>

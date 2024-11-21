@@ -11,7 +11,7 @@ import {
 import WarningIcon from "@mui/icons-material/Warning";
 import getTicker from "@/api/getTicker";
 import Loader from "@/components/Loader";
-import selectedTickerState from "@/state/selectedTicker";
+import { selectedTickerState } from "@/state/state";
 import { Ticker } from "@/commonTypes/tickers";
 import { TokenIcon } from "@web3icons/react";
 

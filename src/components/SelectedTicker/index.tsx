@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import { Stack } from "@mui/material";
-import selectedTickerState from "@/state/selectedTicker";
+import { selectedTickerState } from "@/state/state";
 import getHistory, { HistoryInterval } from "@/api/getHistory";
 import Loader from "../Loader";
 
