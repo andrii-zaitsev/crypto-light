@@ -1,19 +1,19 @@
 import { useRecoilValue } from "recoil";
 import { Stack, List } from "@mui/material";
-import SymbolListItem from "./TickerListItem";
+import TickerListItem from "./TickerListItem";
 import tickersState from "@/state/tickers";
 
-const Symbols = () => {
+const Tickers = () => {
   const symbols = useRecoilValue(tickersState);
   return (
     <Stack>
       <List>
         {symbols.map((symbol) => (
-          <SymbolListItem ticker={symbol} key={symbol.id} />
+          <TickerListItem ticker={symbol} key={symbol.id} />
         ))}
       </List>
     </Stack>
   );
 };
 
-export default Symbols;
+export default Tickers;
