@@ -23,3 +23,8 @@ export type HistoryPoint = {
   priceUsd: string;
   time: number;
 };
+
+export enum Mode {
+  Idle = "idle",
+  Search = "search"
+}

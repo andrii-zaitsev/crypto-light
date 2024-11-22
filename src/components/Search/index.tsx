@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { Stack, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { modeState } from "@/state/state";
-import { Mode } from "@/commonTypes/ui";
+import { Mode } from "@/commonTypes/tickers";
 
 const Search = () => {
   const [value, setValue] = useState("");
@@ -25,6 +25,7 @@ const Search = () => {
             )
           }
         }}
+        focused={mode === Mode.Search}
         fullWidth
       />
       {mode === Mode.Search && (

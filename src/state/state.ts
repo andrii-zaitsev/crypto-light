@@ -1,6 +1,5 @@
 import { atom } from "recoil";
-import { Ticker } from "@/commonTypes/tickers";
-import { Mode } from "@/commonTypes/ui";
+import { Ticker, Mode } from "@/commonTypes/tickers";
 
 export const tickersState = atom<Ticker[]>({
   key: "tickers",
