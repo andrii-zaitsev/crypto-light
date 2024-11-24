@@ -1,24 +1,16 @@
 import { useRecoilValue } from "recoil";
-import { Stack, List } from "@mui/material";
-import TickerListItem from "./TickerListItem";
-import { tickersState } from "@/state/state";
-import NoSymbols from "./NoSymbols";
+import { modeState } from "@/state/state";
+import { Mode } from "@/commonTypes/tickers";
+import SelectedTickers from "./SelectedTickers";
+import SearchTickers from "./SearchTickers";
 
 const Tickers = () => {
-  const tickers = useRecoilValue(tickersState);
-
-  if (tickers.length === 0) {
-    return <NoSymbols />;
-  }
-
+  const mode = useRecoilValue(modeState);
   return (
-    <Stack>
-      <List>
-        {tickers.map((ticker) => (
-          <TickerListItem ticker={ticker} key={ticker.id} />
-        ))}
-      </List>
-    </Stack>
+    <>
+      {mode === Mode.Idle && <SelectedTickers />}
+      {mode === Mode.Search && <SearchTickers />}
+    </>
   );
 };
 
