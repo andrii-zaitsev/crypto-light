@@ -45,6 +45,24 @@ const TickerListItem = ({ ticker }: TickerProps) => {
             {"--"}
           </Typography>
         </ListItemText>
+        <Stack alignItems="flex-end">
+          <Typography component="span" fontWeight="bold">
+            {"--"}
+          </Typography>
+          <Typography
+            component="span"
+            sx={{
+              backgroundColor: "lightgrey",
+              textAlign: "center",
+              color: "white",
+              width: "5rem",
+              borderRadius: "6px",
+              padding: "2px 4px 2px 2px"
+            }}
+          >
+            {`--`}
+          </Typography>
+        </Stack>
       </ListItem>
     );
   }
