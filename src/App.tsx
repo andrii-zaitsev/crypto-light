@@ -10,11 +10,11 @@ const App = () => {
       <Header />
       <main>
         <Stack direction="row">
-          <aside style={{ width: "30%" }}>
+          <aside style={{ width: "20%" }}>
             <Search />
             <Tickers />
           </aside>
-          <section style={{ width: "70%" }}>
+          <section style={{ width: "80%" }}>
             <SelectedTicker />
           </section>
         </Stack>
