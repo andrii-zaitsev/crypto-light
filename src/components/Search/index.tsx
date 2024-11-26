@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { useQueryClient } from "@tanstack/react-query";
 import { Stack, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { modeState } from "@/state/state";
+import { modeState, searchState } from "@/state/state";
 import { Mode } from "@/commonTypes/tickers";
 import { getAssets } from "@/api/api";
 
 const Search = () => {
-  const [value, setValue] = useState("");
+  const [search, setSearch] = useRecoilState(searchState);
   const [mode, setMode] = useRecoilState(modeState);
   const queryClient = useQueryClient();
 
@@ -22,13 +22,18 @@ const Search = () => {
     prefetchAssets();
   }, [queryClient]);
 
+  const switchMode = () => {
+    setMode(Mode.Idle);
+    setSearch("");
+  };
+
   return (
     <Stack direction="row" mb="1.5rem">
       <TextField
         placeholder="Search"
-        value={value}
+        value={search}
         onFocus={() => setMode(Mode.Search)}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => setSearch(event.target.value)}
         slotProps={{
           input: {
             startAdornment: (
@@ -39,10 +44,11 @@ const Search = () => {
           }
         }}
         focused={mode === Mode.Search}
+        sx={{ marginRight: mode === Mode.Idle ? "1rem" : 0 }}
         fullWidth
       />
       {mode === Mode.Search && (
-        <Button variant="text" onClick={() => setMode(Mode.Idle)}>
+        <Button variant="text" onClick={switchMode}>
           Done
         </Button>
       )}
