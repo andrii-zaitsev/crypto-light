@@ -8,7 +8,6 @@ import {
   Typography,
   Stack
 } from "@mui/material";
-import WarningIcon from "@mui/icons-material/Warning";
 import getTicker from "@/api/getTicker";
 import Loader from "@/components/Loader";
 import { selectedTickerState } from "@/state/state";
@@ -50,26 +49,8 @@ const TickerListItem = ({ ticker }: TickerProps) => {
     );
   }
 
-  if (status === "error" || data === undefined) {
-    return (
-      <ListItemButton onClick={onSelect}>
-        <ListItemIcon>
-          <WarningIcon color="warning" fontSize="large" />
-        </ListItemIcon>
-        <ListItemText>
-          <Typography
-            component="h3"
-            fontWeight="bold"
-            textTransform="uppercase"
-          >
-            {ticker.value}
-          </Typography>
-          <Typography component="h4" color="textDisabled">
-            {"--"}
-          </Typography>
-        </ListItemText>
-      </ListItemButton>
-    );
+  if (status === "error") {
+    return null;
   }
 
   const percentChange = Number(data.changePercent24Hr);
