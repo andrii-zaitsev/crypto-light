@@ -126,7 +126,7 @@ const SearchTickers = () => {
                 <Box
                   display="flex"
                   alignItems="center"
-                  sx={{ width: "100%" }}
+                  sx={{ width: "100%", cursor: "pointer" }}
                   onClick={() =>
                     selectTicker({ id: ticker.id, value: ticker.symbol })
                   }
