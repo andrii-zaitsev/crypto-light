@@ -44,7 +44,7 @@ const SearchTickers = () => {
             (savedTicker) => savedTicker.id === ticker.id
           );
           return (
-            <ListItem key={ticker.id}>
+            <ListItem key={ticker.id} sx={{ paddingLeft: 0 }}>
               <ListItemIcon>
                 {isSelected ? (
                   <IconButton
@@ -55,6 +55,7 @@ const SearchTickers = () => {
                         )
                       )
                     }
+                    sx={{ paddingLeft: 0 }}
                   >
                     <CheckCircleIcon color="primary" fontSize="large" />
                   </IconButton>
@@ -66,6 +67,7 @@ const SearchTickers = () => {
                         { id: ticker.id, value: ticker.symbol }
                       ])
                     }
+                    sx={{ paddingLeft: 0 }}
                   >
                     <ControlPointIcon color="primary" fontSize="large" />
                   </IconButton>
