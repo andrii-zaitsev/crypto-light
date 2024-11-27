@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import {
   List,
@@ -8,16 +8,18 @@ import {
   ListItemText,
   Typography,
   IconButton,
-  Stack
+  Stack,
+  Box
 } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { getAssets } from "@/api/api";
-import { searchState, tickersState } from "@/state/state";
+import { searchState, tickersState, selectedTickerState } from "@/state/state";
 
 const SearchTickers = () => {
   const search = useRecoilValue(searchState);
   const [tickers, setTickers] = useRecoilState(tickersState);
+  const selectTicker = useSetRecoilState(selectedTickerState);
 
   const { data = [] } = useQuery({
     queryKey: ["assets"],
@@ -44,7 +46,13 @@ const SearchTickers = () => {
             (savedTicker) => savedTicker.id === ticker.id
           );
           return (
-            <ListItem key={ticker.id} sx={{ paddingLeft: 0 }}>
+            <ListItem
+              key={ticker.id}
+              sx={{
+                paddingLeft: 0,
+                "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" }
+              }}
+            >
               <ListItemIcon>
                 {isSelected ? (
                   <IconButton
@@ -73,31 +81,39 @@ const SearchTickers = () => {
                   </IconButton>
                 )}
               </ListItemIcon>
-
-              <ListItemText>
-                <Typography
-                  component="h3"
-                  fontWeight="bold"
-                  textTransform="uppercase"
-                >
-                  {ticker.symbol}
-                </Typography>
-                <Typography component="h4" color="textDisabled">
-                  {ticker.name}
-                </Typography>
-              </ListItemText>
-              <Stack alignItems="flex-end">
-                <Typography component="span" fontWeight="bold">
-                  {Number(ticker.priceUsd).toFixed(2)}
-                </Typography>
-                <Typography
-                  component="span"
-                  color={isGrowth ? "#65c467" : "#eb4e3d"}
-                  fontWeight="bold"
-                >
-                  {`${Number(ticker.changePercent24Hr).toFixed(3)}%`}
-                </Typography>
-              </Stack>
+              <Box
+                display="flex"
+                alignItems="center"
+                sx={{ width: "100%" }}
+                onClick={() =>
+                  selectTicker({ id: ticker.id, value: ticker.symbol })
+                }
+              >
+                <ListItemText>
+                  <Typography
+                    component="h3"
+                    fontWeight="bold"
+                    textTransform="uppercase"
+                  >
+                    {ticker.symbol}
+                  </Typography>
+                  <Typography component="h4" color="textDisabled">
+                    {ticker.name}
+                  </Typography>
+                </ListItemText>
+                <Stack alignItems="flex-end">
+                  <Typography component="span" fontWeight="bold">
+                    {Number(ticker.priceUsd).toFixed(2)}
+                  </Typography>
+                  <Typography
+                    component="span"
+                    color={isGrowth ? "#65c467" : "#eb4e3d"}
+                    fontWeight="bold"
+                  >
+                    {`${Number(ticker.changePercent24Hr).toFixed(3)}%`}
+                  </Typography>
+                </Stack>
+              </Box>
             </ListItem>
           );
         })}
