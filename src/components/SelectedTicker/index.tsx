@@ -5,6 +5,7 @@ import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import { selectedTickerState, tickersState } from "@/state/state";
 import getTicker from "@/api/getTicker";
 import Loader from "../Loader";
+import Chart from "@/components/Chart";
 
 const SelectedTicker = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
@@ -66,6 +67,9 @@ const SelectedTicker = () => {
             Add
           </Button>
         )}
+      </Box>
+      <Box>
+        <Chart />
       </Box>
     </Stack>
   );
