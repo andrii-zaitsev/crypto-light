@@ -6,6 +6,7 @@ import { HistoryInterval } from "@/api/getHistory";
 import getHistory from "@/api/getHistory";
 import Loader from "../Loader";
 import Chart from "@/components/Chart";
+import { HistoryPoint } from "@/commonTypes/tickers";
 
 const TickerHistory = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
@@ -22,29 +23,19 @@ const TickerHistory = () => {
     );
   }
 
-  const tickerHistory = data.map((historyItem) => ({
-    ...historyItem,
-    priceUsd: Number(Number(historyItem.priceUsd).toFixed(2))
-  }));
-
-  console.log({
-    tickerHistory,
-    data,
-    first: tickerHistory[59],
-    second: tickerHistory[119]
-  });
-
-  const gett = () => {
-    const points = [];
-    for (let i = 0; i < tickerHistory.length; i += 60) {
-      points.push(tickerHistory[i ? i - 1 : i]);
+  const getTickerHistory = () => {
+    const points: HistoryPoint[] = [];
+    for (let i = 0; i < data.length; i += 60) {
+      points.push(data[i ? i - 1 : i]);
     }
     return points;
   };
 
+  const tickerHistory = getTickerHistory();
+
   return (
     <Box>
-      <Chart data={gett()} />
+      <Chart data={tickerHistory} />
     </Box>
   );
 };

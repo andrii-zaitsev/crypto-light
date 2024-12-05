@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { AreaChart, XAxis, YAxis, Tooltip, Area } from "recharts";
 import { HistoryPoint } from "@/commonTypes/tickers";
 
@@ -12,10 +11,10 @@ const Chart = ({ data }: ChartProps) => {
   const green = "#75d371";
   const chartColor = isRed ? red : green;
 
-  const tooltipContent = data.reduce(
+  const tooltipContent = data.reduce<{ [key: number]: string }>(
     (content, current) => ({
       ...content,
-      [current.time]: current.priceUsd.toLocaleString("en-US", {
+      [current.time]: Number(current.priceUsd).toLocaleString("en-US", {
         style: "currency",
         currency: "USD",
         minimumFractionDigits: 2
@@ -37,7 +36,7 @@ const Chart = ({ data }: ChartProps) => {
       <Tooltip
         active={window.innerWidth > 900}
         itemStyle={{ display: "none" }}
-        labelFormatter={(time) => tooltipContent[time]}
+        labelFormatter={(time: number) => tooltipContent[time]}
         contentStyle={{
           padding: 0,
           backgroundColor: "transparent",
