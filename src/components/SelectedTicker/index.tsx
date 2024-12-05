@@ -1,11 +1,11 @@
 import { useRecoilValue, useRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
-import { Stack, Box, Button } from "@mui/material";
+import { Stack, Box, Button, Typography } from "@mui/material";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import { selectedTickerState, tickersState } from "@/state/state";
 import getTicker from "@/api/getTicker";
 import Loader from "../Loader";
-import Chart from "@/components/Chart";
+import TickerHistory from "./TickerHistory";
 
 const SelectedTicker = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
@@ -68,9 +68,14 @@ const SelectedTicker = () => {
           </Button>
         )}
       </Box>
-      <Box>
-        <Chart />
-      </Box>
+      <Stack alignItems="center">
+        <Box textAlign="left">
+          <Typography component="h1" textAlign="left">
+            {selectedTicker.value}
+          </Typography>
+        </Box>
+        <TickerHistory />
+      </Stack>
     </Stack>
   );
 };

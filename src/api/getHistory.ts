@@ -1,22 +1,18 @@
 import { HistoryPoint } from "@/commonTypes/tickers";
 
 export enum HistoryInterval {
-  OneMin = "m1",
-  FiveMin = "m5",
-  FifteenMin = "m15",
-  ThirtyMin = "m30",
-  OneHour = "h1",
-  TwoHour = "h2",
-  SixHour = "h6",
-  TwelveHour = "h12",
-  OneDay = "d1"
+  Day = "m1",
+  Week = "m15",
+  Month = "h1",
+  HalfYear = "h6",
+  Year = "d1"
 }
 
 const getHistory = (
   id: string,
   interval: HistoryInterval
 ): Promise<HistoryPoint[]> =>
-  fetch(`/v2/assets/${id}/history?interval=${interval}`)
+  fetch(`https://api.coincap.io/v2/assets/${id}/history?interval=${interval}`)
     .then((res) => res.json())
     .then(({ data }) => data);
 

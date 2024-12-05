@@ -1,73 +1,60 @@
-import {
-  LineChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Line
-} from "recharts";
+import { useRef } from "react";
+import { AreaChart, XAxis, YAxis, Tooltip, Area } from "recharts";
+import { HistoryPoint } from "@/commonTypes/tickers";
 
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100
-  }
-];
+export type ChartProps = {
+  data: HistoryPoint[];
+};
 
-const Chart = () => {
-  console.log(1);
+const Chart = ({ data }: ChartProps) => {
+  const isRed = data[0].priceUsd > data[data.length - 1].priceUsd;
+  const red = "#eb5023";
+  const green = "#75d371";
+  const chartColor = isRed ? red : green;
+
+  const tooltipContent = data.reduce(
+    (content, current) => ({
+      ...content,
+      [current.time]: current.priceUsd.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2
+      })
+    }),
+    {}
+  );
+
   return (
-    <LineChart width={500} height={500} data={data}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" padding={{ left: 30, right: 30 }} />
-      <YAxis />
-      <Tooltip />
-      <Line
-        type="monotone"
-        dataKey="pv"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
+    <AreaChart width={window.innerWidth * 0.56} height={170} data={data}>
+      <defs>
+        <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="20%" stopColor={chartColor} stopOpacity={0.8} />
+          <stop offset="95%" stopColor={chartColor} stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <XAxis dataKey="time" />
+      <YAxis type="number" domain={["dataMin", "dataMax"]} minTickGap={10} />
+      <Tooltip
+        active={window.innerWidth > 900}
+        itemStyle={{ display: "none" }}
+        labelFormatter={(time) => tooltipContent[time]}
+        contentStyle={{
+          padding: 0,
+          backgroundColor: "transparent",
+          border: "0px solid transparent",
+          fontFamily: "sans-serif",
+          fontSize: "1.4rem"
+        }}
       />
-      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-    </LineChart>
+      <Area
+        type="monotone"
+        dataKey="priceUsd"
+        stroke={chartColor}
+        strokeWidth={3}
+        fillOpacity={1}
+        fill="url(#colorPrice)"
+      />
+    </AreaChart>
   );
 };
 
