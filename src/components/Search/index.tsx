@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { useQueryClient } from "@tanstack/react-query";
 import { Stack, TextField, Button, InputAdornment } from "@mui/material";
@@ -11,6 +11,7 @@ const Search = () => {
   const [search, setSearch] = useRecoilState(searchState);
   const [mode, setMode] = useRecoilState(modeState);
   const queryClient = useQueryClient();
+  const searchRef = useRef();
 
   useEffect(() => {
     const prefetchAssets = async () => {
@@ -21,6 +22,12 @@ const Search = () => {
     };
     prefetchAssets();
   }, [queryClient]);
+
+  useEffect(() => {
+    if (mode === Mode.Search) {
+      searchRef.current.focus();
+    }
+  }, [mode]);
 
   const switchMode = () => {
     setMode(Mode.Idle);
@@ -43,7 +50,7 @@ const Search = () => {
             )
           }
         }}
-        focused={mode === Mode.Search}
+        inputRef={searchRef}
         sx={{ marginRight: mode === Mode.Idle ? "1rem" : 0 }}
         fullWidth
       />
