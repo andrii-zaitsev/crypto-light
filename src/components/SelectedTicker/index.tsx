@@ -1,6 +1,6 @@
 import { useRecoilValue, useRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
-import { Stack, Box, Button, Typography } from "@mui/material";
+import { Stack, Box, ButtonGroup, Button, Typography } from "@mui/material";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import { selectedTickerState, tickersState } from "@/state/state";
 import getTicker from "@/api/getTicker";
@@ -68,14 +68,47 @@ const SelectedTicker = () => {
           </Button>
         )}
       </Box>
-      <Stack alignItems="center">
-        <Box textAlign="left">
-          <Typography component="h1" textAlign="left">
+      <Box marginLeft="auto" marginRight="auto">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Typography
+            component="h1"
+            fontSize="2rem"
+            fontWeight="bold"
+            mr="0.5rem"
+          >
             {selectedTicker.value}
           </Typography>
+          <Typography component="span" fontSize="1.5rem">
+            {Number(data.priceUsd).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 2
+            })}
+          </Typography>
+        </Stack>
+        <Typography component="h2" color="textDisabled">
+          {data.name}
+        </Typography>
+        <ButtonGroup
+          variant="outlined"
+          aria-label="Basic button group"
+          sx={{ marginTop: "1rem" }}
+          fullWidth
+        >
+          <Button fullWidth>Day</Button>
+          <Button fullWidth>Week</Button>
+          <Button fullWidth>Month</Button>
+          <Button fullWidth>Six Months</Button>
+          <Button fullWidth>Year</Button>
+        </ButtonGroup>
+        <Box mt="1rem">
+          <TickerHistory />
         </Box>
-        <TickerHistory />
-      </Stack>
+      </Box>
     </Stack>
   );
 };
