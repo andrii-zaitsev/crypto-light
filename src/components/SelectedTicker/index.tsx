@@ -1,7 +1,13 @@
 import { useRecoilValue, useRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
-import { Stack, Box, ButtonGroup, Button, Typography } from "@mui/material";
-import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import {
+  Stack,
+  Box,
+  ButtonGroup,
+  Button,
+  Typography,
+  Link
+} from "@mui/material";
 import { selectedTickerState, tickersState } from "@/state/state";
 import getTicker from "@/api/getTicker";
 import Loader from "../Loader";
@@ -36,14 +42,6 @@ const SelectedTicker = () => {
           justifyContent: "flex-end"
         }}
       >
-        <Button
-          href={data.explorer}
-          variant="outlined"
-          endIcon={<TravelExploreIcon />}
-          sx={{ marginRight: "1rem" }}
-        >
-          Source
-        </Button>
         {isSaved ? (
           <Button
             variant="contained"
@@ -105,9 +103,12 @@ const SelectedTicker = () => {
           <Button fullWidth>Six Months</Button>
           <Button fullWidth>Year</Button>
         </ButtonGroup>
-        <Box mt="1rem">
+        <Box mt="1rem" mb="1rem">
           <TickerHistory />
         </Box>
+        <Link href={data.explorer} underline="always" fontFamily="sans-serif">
+          See More
+        </Link>
       </Box>
     </Stack>
   );
