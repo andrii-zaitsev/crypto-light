@@ -1,13 +1,6 @@
 import { useRecoilValue, useRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Stack,
-  Box,
-  ButtonGroup,
-  Button,
-  Typography,
-  Link
-} from "@mui/material";
+import { Stack, Box, Button, Typography, Link } from "@mui/material";
 import { selectedTickerState, tickersState } from "@/state/state";
 import getTicker from "@/api/getTicker";
 import Loader from "../Loader";
@@ -91,21 +84,7 @@ const SelectedTicker = () => {
         <Typography component="h2" color="textDisabled">
           {data.name}
         </Typography>
-        <ButtonGroup
-          variant="outlined"
-          aria-label="Basic button group"
-          sx={{ marginTop: "1rem" }}
-          fullWidth
-        >
-          <Button fullWidth>Day</Button>
-          <Button fullWidth>Week</Button>
-          <Button fullWidth>Month</Button>
-          <Button fullWidth>Six Months</Button>
-          <Button fullWidth>Year</Button>
-        </ButtonGroup>
-        <Box mt="1rem" mb="1rem">
-          <TickerHistory />
-        </Box>
+        <TickerHistory />
         <Link href={data.explorer} underline="always" fontFamily="sans-serif">
           See More
         </Link>

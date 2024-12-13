@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, ButtonGroup, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { selectedTickerState } from "@/state/state";
 import { HistoryInterval } from "@/api/getHistory";
@@ -10,9 +11,10 @@ import { HistoryPoint } from "@/commonTypes/tickers";
 
 const TickerHistory = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
+  const [interval, setInterval] = useState(HistoryInterval.Day);
   const { data, status } = useQuery({
-    queryKey: ["history", selectedTicker.id],
-    queryFn: () => getHistory(selectedTicker.id, HistoryInterval.Day)
+    queryKey: ["history", selectedTicker.id, interval],
+    queryFn: () => getHistory(selectedTicker.id, interval)
   });
 
   if (status === "pending" || data === undefined) {
@@ -34,9 +36,33 @@ const TickerHistory = () => {
   const tickerHistory = getTickerHistory();
 
   return (
-    <Box>
-      <Chart data={tickerHistory} />
-    </Box>
+    <>
+      <ButtonGroup
+        variant="outlined"
+        aria-label="Basic button group"
+        sx={{ marginTop: "1rem" }}
+        fullWidth
+      >
+        <Button onClick={() => setInterval(HistoryInterval.Day)} fullWidth>
+          Day
+        </Button>
+        <Button onClick={() => setInterval(HistoryInterval.Week)} fullWidth>
+          Week
+        </Button>
+        <Button onClick={() => setInterval(HistoryInterval.Month)} fullWidth>
+          Month
+        </Button>
+        <Button onClick={() => setInterval(HistoryInterval.HalfYear)} fullWidth>
+          Six Months
+        </Button>
+        <Button onClick={() => setInterval(HistoryInterval.Year)} fullWidth>
+          Year
+        </Button>
+      </ButtonGroup>
+      <Box mt="1rem" mb="1rem">
+        <Chart data={tickerHistory} />
+      </Box>
+    </>
   );
 };
 
