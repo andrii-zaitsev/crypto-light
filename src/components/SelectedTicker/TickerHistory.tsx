@@ -11,10 +11,10 @@ import { HistoryPoint } from "@/commonTypes/tickers";
 
 const TickerHistory = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
-  const [interval, setInterval] = useState(HistoryInterval.Day);
+  const [selectedInterval, setSelectedInterval] = useState(HistoryInterval.Day);
   const { data, status } = useQuery({
-    queryKey: ["history", selectedTicker.id, interval],
-    queryFn: () => getHistory(selectedTicker.id, interval)
+    queryKey: ["history", selectedTicker.id, selectedInterval],
+    queryFn: () => getHistory(selectedTicker.id, selectedInterval)
   });
 
   const queryClient = useQueryClient();
@@ -46,6 +46,14 @@ const TickerHistory = () => {
 
   const tickerHistory = getTickerHistory();
 
+  const intervals: [HistoryInterval, string][] = [
+    [HistoryInterval.Day, "Day"],
+    [HistoryInterval.Week, "Week"],
+    [HistoryInterval.Month, "Month"],
+    [HistoryInterval.HalfYear, "Six Months"],
+    [HistoryInterval.Year, "Year"]
+  ];
+
   return (
     <>
       <ButtonGroup
@@ -54,21 +62,18 @@ const TickerHistory = () => {
         sx={{ marginTop: "1rem" }}
         fullWidth
       >
-        <Button onClick={() => setInterval(HistoryInterval.Day)} fullWidth>
-          Day
-        </Button>
-        <Button onClick={() => setInterval(HistoryInterval.Week)} fullWidth>
-          Week
-        </Button>
-        <Button onClick={() => setInterval(HistoryInterval.Month)} fullWidth>
-          Month
-        </Button>
-        <Button onClick={() => setInterval(HistoryInterval.HalfYear)} fullWidth>
-          Six Months
-        </Button>
-        <Button onClick={() => setInterval(HistoryInterval.Year)} fullWidth>
-          Year
-        </Button>
+        {intervals.map(([historyInterval, buttonText]) => (
+          <Button
+            variant={
+              selectedInterval === historyInterval ? "contained" : "outlined"
+            }
+            onClick={() => setSelectedInterval(historyInterval)}
+            fullWidth
+            key={historyInterval}
+          >
+            {buttonText}
+          </Button>
+        ))}
       </ButtonGroup>
       <Box mt="1rem" mb="1rem">
         <Chart data={tickerHistory} />
