@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { Box, Stack, ButtonGroup, Button } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { selectedTickerState } from "@/state/state";
 import { HistoryInterval } from "@/api";
 import { getHistory } from "@/api";
@@ -16,6 +16,17 @@ const TickerHistory = () => {
     queryKey: ["history", selectedTicker.id, interval],
     queryFn: () => getHistory(selectedTicker.id, interval)
   });
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    Object.values(HistoryInterval).forEach((interval) =>
+      queryClient.prefetchQuery({
+        queryKey: ["history", selectedTicker.id, interval],
+        queryFn: () => getHistory(selectedTicker.id, interval)
+      })
+    );
+  }, [queryClient, selectedTicker]);
 
   if (status === "pending" || data === undefined) {
     return (
