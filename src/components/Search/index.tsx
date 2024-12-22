@@ -5,7 +5,7 @@ import { Stack, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { modeState, searchState } from "@/state/state";
 import { Mode } from "@/commonTypes/tickers";
-import { getAssets } from "@/api/api";
+import { getAssets } from "@/api";
 
 const Search = () => {
   const [search, setSearch] = useRecoilState(searchState);

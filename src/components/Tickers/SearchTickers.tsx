@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { getAssets } from "@/api/api";
+import { getAssets } from "@/api";
 import { searchState, tickersState, selectedTickerState } from "@/state/state";
 
 const SearchTickers = () => {

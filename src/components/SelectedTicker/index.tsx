@@ -2,7 +2,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import { Stack, Box, Button, Typography, Link } from "@mui/material";
 import { selectedTickerState, tickersState } from "@/state/state";
-import getTicker from "@/api/getTicker";
+import { getTicker } from "@/api";
 import Loader from "../Loader";
 import TickerHistory from "./TickerHistory";
 

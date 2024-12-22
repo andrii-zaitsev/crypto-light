@@ -8,7 +8,7 @@ import {
   Typography,
   Stack
 } from "@mui/material";
-import getTicker from "@/api/getTicker";
+import { getTicker } from "@/api";
 import Loader from "@/components/Loader";
 import { selectedTickerState } from "@/state/state";
 import { Ticker } from "@/commonTypes/tickers";
