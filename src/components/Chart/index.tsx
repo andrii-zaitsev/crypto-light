@@ -1,24 +1,31 @@
+import { format } from "date-fns";
+import { Stack, Typography } from "@mui/material";
 import { AreaChart, XAxis, YAxis, Tooltip, Area } from "recharts";
 import { HistoryPoint } from "@/commonTypes/tickers";
 
 export type ChartProps = {
   data: HistoryPoint[];
+  dayTime?: boolean;
 };
 
-const Chart = ({ data }: ChartProps) => {
+const Chart = ({ data, dayTime = false }: ChartProps) => {
   const isRed = data[0].priceUsd > data[data.length - 1].priceUsd;
   const red = "#eb5023";
   const green = "#75d371";
   const chartColor = isRed ? red : green;
 
-  const tooltipContent = data.reduce<{ [key: number]: string }>(
+  const tooltipContent = data.reduce(
     (content, current) => ({
       ...content,
-      [current.time]: Number(current.priceUsd).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 2
-      })
+      [current.time]: {
+        price: Number(current.priceUsd).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 2
+        }),
+        date: format(new Date(current.date), "d MMM y"),
+        dateFormatDay: format(new Date(current.date), "d MMM y hh:m a")
+      }
     }),
     {}
   );
@@ -35,14 +42,22 @@ const Chart = ({ data }: ChartProps) => {
       <YAxis type="number" domain={["dataMin", "dataMax"]} minTickGap={10} />
       <Tooltip
         active={window.innerWidth > 900}
-        itemStyle={{ display: "none" }}
-        labelFormatter={(time: number) => tooltipContent[time]}
-        contentStyle={{
-          padding: 0,
-          backgroundColor: "transparent",
-          border: "0px solid transparent",
-          fontFamily: "sans-serif",
-          fontSize: "1.4rem"
+        // itemStyle={{ display: "none" }}
+        content={({ payload }) => {
+          const [currentPayload] = payload;
+          if (currentPayload?.payload) {
+            const { time } = currentPayload.payload;
+            return (
+              <Stack>
+                <Typography>{tooltipContent[time].price}</Typography>
+                <Typography>
+                  {dayTime
+                    ? tooltipContent[time].dateFormatDay
+                    : tooltipContent[time].date}
+                </Typography>
+              </Stack>
+            );
+          }
         }}
       />
       <Area

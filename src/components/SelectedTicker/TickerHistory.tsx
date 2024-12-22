@@ -76,7 +76,13 @@ const TickerHistory = () => {
         ))}
       </ButtonGroup>
       <Box mt="1rem" mb="1rem">
-        <Chart data={tickerHistory} />
+        <Chart
+          data={data}
+          dayTime={
+            selectedInterval === HistoryInterval.Day ||
+            selectedInterval === HistoryInterval.Week
+          }
+        />
       </Box>
     </>
   );
