@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { format } from "date-fns";
 import { Stack, Typography } from "@mui/material";
 import { AreaChart, XAxis, YAxis, Tooltip, Area } from "recharts";
@@ -14,20 +15,24 @@ const Chart = ({ data, dayTime = false }: ChartProps) => {
   const green = "#75d371";
   const chartColor = isRed ? red : green;
 
-  const tooltipContent = data.reduce(
-    (content, current) => ({
-      ...content,
-      [current.time]: {
-        price: Number(current.priceUsd).toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-          minimumFractionDigits: 2
+  const tooltipContent = useMemo(
+    () =>
+      data.reduce(
+        (content, current) => ({
+          ...content,
+          [current.time]: {
+            price: Number(current.priceUsd).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 2
+            }),
+            date: format(new Date(current.date), "d MMM y"),
+            dateFormatDay: format(new Date(current.date), "d MMM y hh:m a")
+          }
         }),
-        date: format(new Date(current.date), "d MMM y"),
-        dateFormatDay: format(new Date(current.date), "d MMM y hh:m a")
-      }
-    }),
-    {}
+        {}
+      ),
+    [data]
   );
 
   return (
@@ -38,14 +43,8 @@ const Chart = ({ data, dayTime = false }: ChartProps) => {
           <stop offset="95%" stopColor={chartColor} stopOpacity={0} />
         </linearGradient>
       </defs>
-      <XAxis dataKey="time" />
-      <YAxis
-        type="number"
-        domain={["dataMin", "dataMax"]}
-        minTickGap={10}
-        tick={false}
-        tickLine={false}
-      />
+      <XAxis dataKey="time" tick={false} tickLine={false} />
+      <YAxis type="number" domain={["dataMin", "dataMax"]} minTickGap={10} />
       <Tooltip
         active={window.innerWidth > 900}
         // itemStyle={{ display: "none" }}
