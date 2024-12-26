@@ -44,7 +44,21 @@ const Chart = ({ data, dayTime = false }: ChartProps) => {
         </linearGradient>
       </defs>
       <XAxis dataKey="time" tick={false} tickLine={false} />
-      <YAxis type="number" domain={["dataMin", "dataMax"]} minTickGap={10} />
+      <YAxis
+        tickFormatter={(price) => {
+          if (price) {
+            const textPrice = Number(price).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD"
+            });
+            return textPrice.slice(0, textPrice.indexOf("."));
+          }
+          return "--";
+        }}
+        tick={{ fontFamily: "sans-serif" }}
+        domain={["dataMin", "dataMax"]}
+        minTickGap={10}
+      />
       <Tooltip
         active={window.innerWidth > 900}
         // itemStyle={{ display: "none" }}

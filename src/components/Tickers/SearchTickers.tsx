@@ -46,8 +46,6 @@ const SearchTickers = () => {
     overscan: 5
   });
 
-  console.log({ searchTickersL: searchTickers.length });
-
   return (
     <Box
       sx={{
