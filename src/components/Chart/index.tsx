@@ -27,7 +27,7 @@ const Chart = ({ data, dayTime = false }: ChartProps) => {
               minimumFractionDigits: 2
             }),
             date: format(new Date(current.date), "d MMM y"),
-            dateFormatDay: format(new Date(current.date), "d MMM y hh:m a")
+            dateFormatDay: format(new Date(current.date), "d MMM y hh:mm a")
           }
         }),
         {}
