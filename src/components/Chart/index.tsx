@@ -39,7 +39,13 @@ const Chart = ({ data, dayTime = false }: ChartProps) => {
         </linearGradient>
       </defs>
       <XAxis dataKey="time" />
-      <YAxis type="number" domain={["dataMin", "dataMax"]} minTickGap={10} />
+      <YAxis
+        type="number"
+        domain={["dataMin", "dataMax"]}
+        minTickGap={10}
+        tick={false}
+        tickLine={false}
+      />
       <Tooltip
         active={window.innerWidth > 900}
         // itemStyle={{ display: "none" }}
