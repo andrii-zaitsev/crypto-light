@@ -15,7 +15,7 @@ import {
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { getAssets } from "@/api";
-import { searchState, tickersState, selectedTickerState } from "@/state/state";
+import { searchState, tickersState, selectedTickerState } from "@/state";
 
 const SearchTickers = () => {
   const search = useRecoilValue(searchState);

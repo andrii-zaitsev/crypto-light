@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { useQueryClient } from "@tanstack/react-query";
 import { Stack, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { modeState, searchState } from "@/state/state";
+import { modeState, searchState } from "@/state";
 import { Mode } from "@/commonTypes";
 import { getAssets } from "@/api";
 

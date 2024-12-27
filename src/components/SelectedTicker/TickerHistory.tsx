@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { Box, Stack, ButtonGroup, Button } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { selectedTickerState, priceChangeState } from "@/state/state";
+import { selectedTickerState, priceChangeState } from "@/state";
 import { HistoryInterval } from "@/api";
 import { getHistory } from "@/api";
 import Loader from "../Loader";

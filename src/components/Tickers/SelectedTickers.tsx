@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { Stack, List } from "@mui/material";
 import TickerListItem from "./TickerListItem";
-import { tickersState } from "@/state/state";
+import { tickersState } from "@/state";
 import NoSymbols from "./NoSymbols";
 
 const SelectedTickers = () => {

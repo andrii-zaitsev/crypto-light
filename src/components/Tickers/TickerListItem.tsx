@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { getTicker } from "@/api";
 import Loader from "@/components/Loader";
-import { selectedTickerState } from "@/state/state";
+import { selectedTickerState } from "@/state";
 import { Ticker } from "@/commonTypes";
 import { TokenIcon } from "@web3icons/react";
 
