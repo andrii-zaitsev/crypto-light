@@ -10,10 +10,13 @@ export type ChartProps = {
 };
 
 const Chart = ({ data, dayTime = false }: ChartProps) => {
-  const isRed = data[0].priceUsd > data[data.length - 1].priceUsd;
-  const red = "#eb5023";
-  const green = "#75d371";
-  const chartColor = isRed ? red : green;
+  const getChartColor = () => {
+    const first = data[0];
+    const last = data[data.length - 1];
+    const isRed = first.priceUsd > last.priceUsd;
+    return isRed ? "#eb5023" : "#75d371";
+  };
+  const chartColor = getChartColor();
 
   const tooltipContent = useMemo(
     () =>
