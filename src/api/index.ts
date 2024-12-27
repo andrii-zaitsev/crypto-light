@@ -1,4 +1,4 @@
-import { CryptoAsset, ApiHistoryPoint } from "@/commonTypes/tickers";
+import { CryptoAsset, ApiHistoryPoint } from "@/commonTypes";
 
 export const getAssets = (): Promise<CryptoAsset[]> =>
   fetch("https://api.coincap.io/v2/assets")

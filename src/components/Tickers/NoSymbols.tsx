@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
 import { Stack, Typography, Button } from "@mui/material";
-import { Mode } from "@/commonTypes/tickers";
+import { Mode } from "@/commonTypes";
 import { modeState } from "@/state/state";
 
 const NoSymbols = () => {

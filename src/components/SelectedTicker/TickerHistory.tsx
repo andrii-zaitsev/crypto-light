@@ -7,7 +7,7 @@ import { HistoryInterval } from "@/api";
 import { getHistory } from "@/api";
 import Loader from "../Loader";
 import Chart from "@/components/Chart";
-import { HistoryPoint } from "@/commonTypes/tickers";
+import { HistoryPoint } from "@/commonTypes";
 
 const TickerHistory = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);

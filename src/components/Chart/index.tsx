@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { format } from "date-fns";
 import { Stack, Typography } from "@mui/material";
 import { AreaChart, XAxis, YAxis, Tooltip, Area } from "recharts";
-import { HistoryPoint } from "@/commonTypes/tickers";
+import { HistoryPoint } from "@/commonTypes";
 
 export type ChartProps = {
   data: HistoryPoint[];

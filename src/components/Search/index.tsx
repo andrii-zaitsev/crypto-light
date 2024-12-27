@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Stack, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { modeState, searchState } from "@/state/state";
-import { Mode } from "@/commonTypes/tickers";
+import { Mode } from "@/commonTypes";
 import { getAssets } from "@/api";
 
 const Search = () => {

@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { modeState } from "@/state/state";
-import { Mode } from "@/commonTypes/tickers";
+import { Mode } from "@/commonTypes";
 import SelectedTickers from "./SelectedTickers";
 import SearchTickers from "./SearchTickers";
 

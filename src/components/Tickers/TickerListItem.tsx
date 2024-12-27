@@ -11,7 +11,7 @@ import {
 import { getTicker } from "@/api";
 import Loader from "@/components/Loader";
 import { selectedTickerState } from "@/state/state";
-import { Ticker } from "@/commonTypes/tickers";
+import { Ticker } from "@/commonTypes";
 import { TokenIcon } from "@web3icons/react";
 
 export type TickerProps = {
