@@ -1,4 +1,4 @@
-import { CryptoAsset, HistoryPoint } from "@/commonTypes/tickers";
+import { CryptoAsset, ApiHistoryPoint } from "@/commonTypes/tickers";
 
 export const getAssets = (): Promise<CryptoAsset[]> =>
   fetch("https://api.coincap.io/v2/assets")
@@ -16,7 +16,7 @@ export enum HistoryInterval {
 export const getHistory = (
   id: string,
   interval: HistoryInterval
-): Promise<HistoryPoint[]> =>
+): Promise<ApiHistoryPoint[]> =>
   fetch(`https://api.coincap.io/v2/assets/${id}/history?interval=${interval}`)
     .then((res) => res.json())
     .then(({ data }) => data);

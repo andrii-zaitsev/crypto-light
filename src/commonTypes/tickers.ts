@@ -18,10 +18,14 @@ export type CryptoAsset = {
   explorer: string;
 };
 
-export type HistoryPoint = {
+export type ApiHistoryPoint = {
   date: string;
   priceUsd: string;
   time: number;
+};
+
+export type HistoryPoint = Omit<ApiHistoryPoint, "priceUsd"> & {
+  priceUsd: number;
 };
 
 export enum Mode {

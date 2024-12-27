@@ -56,12 +56,12 @@ const Chart = ({ data, dayTime = false }: ChartProps) => {
           return "--";
         }}
         tick={{ fontFamily: "sans-serif" }}
+        type="number"
         domain={["dataMin", "dataMax"]}
         minTickGap={10}
       />
       <Tooltip
         active={window.innerWidth > 900}
-        // itemStyle={{ display: "none" }}
         content={({ payload }) => {
           const [currentPayload] = payload;
           if (currentPayload?.payload) {

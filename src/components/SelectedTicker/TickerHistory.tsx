@@ -14,7 +14,12 @@ const TickerHistory = () => {
   const [selectedInterval, setSelectedInterval] = useState(HistoryInterval.Day);
   const { data, status } = useQuery({
     queryKey: ["history", selectedTicker.id, selectedInterval],
-    queryFn: () => getHistory(selectedTicker.id, selectedInterval)
+    queryFn: () => getHistory(selectedTicker.id, selectedInterval),
+    select: (history): HistoryPoint[] =>
+      history.map((historyItem) => ({
+        ...historyItem,
+        priceUsd: Number(historyItem.priceUsd)
+      }))
   });
 
   const queryClient = useQueryClient();
@@ -35,16 +40,6 @@ const TickerHistory = () => {
       </Stack>
     );
   }
-
-  const getTickerHistory = () => {
-    const points: HistoryPoint[] = [];
-    for (let i = 0; i < data.length; i += 60) {
-      points.push(data[i ? i - 1 : i]);
-    }
-    return points;
-  };
-
-  const tickerHistory = getTickerHistory();
 
   const intervals: [HistoryInterval, string][] = [
     [HistoryInterval.Day, "Day"],
