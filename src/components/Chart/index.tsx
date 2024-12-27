@@ -6,17 +6,12 @@ import { HistoryPoint } from "@/commonTypes";
 
 export type ChartProps = {
   data: HistoryPoint[];
+  isGrowth: boolean;
   dayTime?: boolean;
 };
 
-const Chart = ({ data, dayTime = false }: ChartProps) => {
-  const getChartColor = () => {
-    const first = data[0];
-    const last = data[data.length - 1];
-    const isRed = first.priceUsd > last.priceUsd;
-    return isRed ? "#eb5023" : "#75d371";
-  };
-  const chartColor = getChartColor();
+const Chart = ({ data, isGrowth, dayTime = false }: ChartProps) => {
+  const chartColor = isGrowth ? "#75d371" : "#eb5023";
 
   const tooltipContent = useMemo(
     () =>

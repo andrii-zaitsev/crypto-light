@@ -32,3 +32,8 @@ export enum Mode {
   Idle = "idle",
   Search = "search"
 }
+
+export type PriceChange = {
+  value: number;
+  isGrowth: boolean;
+};

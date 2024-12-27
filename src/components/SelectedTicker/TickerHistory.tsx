@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { Box, Stack, ButtonGroup, Button } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { selectedTickerState } from "@/state/state";
+import { selectedTickerState, priceChangeState } from "@/state/state";
 import { HistoryInterval } from "@/api";
 import { getHistory } from "@/api";
 import Loader from "../Loader";
 import Chart from "@/components/Chart";
-import { HistoryPoint } from "@/commonTypes";
+import { HistoryPoint, PriceChange } from "@/commonTypes";
 
 const TickerHistory = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
+  const [priceChange, setPriceChange] = useRecoilState(priceChangeState);
   const [selectedInterval, setSelectedInterval] = useState(HistoryInterval.Day);
+
   const { data, status } = useQuery({
     queryKey: ["history", selectedTicker.id, selectedInterval],
     queryFn: () => getHistory(selectedTicker.id, selectedInterval),
@@ -32,6 +34,19 @@ const TickerHistory = () => {
       })
     );
   }, [queryClient, selectedTicker]);
+
+  useEffect(() => {
+    if (data) {
+      const computePriceChange = (): PriceChange => {
+        const first = data[0];
+        const last = data[data.length - 1];
+        const intervalPriceChange = last.priceUsd - first.priceUsd;
+        const isGrowth = intervalPriceChange === Math.abs(intervalPriceChange);
+        return { value: intervalPriceChange, isGrowth };
+      };
+      setPriceChange(computePriceChange());
+    }
+  }, [selectedInterval, data, setPriceChange]);
 
   if (status === "pending" || data === undefined) {
     return (
@@ -73,10 +88,12 @@ const TickerHistory = () => {
       <Box mt="1rem" mb="1rem">
         <Chart
           data={data}
+          isGrowth={priceChange.isGrowth}
           dayTime={
             selectedInterval === HistoryInterval.Day ||
             selectedInterval === HistoryInterval.Week
           }
+          key={priceChange.value}
         />
       </Box>
     </>

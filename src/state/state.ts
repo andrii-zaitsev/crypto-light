@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { Ticker, Mode } from "@/commonTypes";
+import { Ticker, Mode, PriceChange } from "@/commonTypes";
 
 export const tickersState = atom<Ticker[]>({
   key: "tickers",
@@ -19,4 +19,12 @@ export const modeState = atom<Mode>({
 export const searchState = atom({
   key: "searchState",
   default: ""
+});
+
+export const priceChangeState = atom<PriceChange>({
+  key: "priceChange",
+  default: {
+    value: 0,
+    isGrowth: true
+  }
 });
