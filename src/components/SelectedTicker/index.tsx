@@ -3,8 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Stack, Box, Button, Typography, Link } from "@mui/material";
 import { selectedTickerState, tickersState } from "@/state";
 import { getTicker } from "@/api";
-import Loader from "../Loader";
+import Loader from "@/components/Loader";
 import TickerHistory from "./TickerHistory";
+import Price from "./Price";
 
 const SelectedTicker = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
@@ -73,13 +74,7 @@ const SelectedTicker = () => {
           >
             {selectedTicker.value}
           </Typography>
-          <Typography component="span" fontSize="1.5rem">
-            {Number(data.priceUsd).toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-              minimumFractionDigits: 2
-            })}
-          </Typography>
+          <Price price={Number(data.priceUsd)} />
         </Stack>
         <Typography component="h2" color="textDisabled">
           {data.name}
