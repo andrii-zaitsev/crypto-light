@@ -19,11 +19,7 @@ const Chart = ({ data, isGrowth, dayTime = false }: ChartProps) => {
         (content, current) => ({
           ...content,
           [current.time]: {
-            price: Number(current.priceUsd).toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-              minimumFractionDigits: 2
-            }),
+            price: Number(current.priceUsd.toFixed(2)).toLocaleString(),
             date: format(new Date(current.date), "d MMM y"),
             dateFormatDay: format(new Date(current.date), "d MMM y hh:mm a")
           }
@@ -45,11 +41,7 @@ const Chart = ({ data, isGrowth, dayTime = false }: ChartProps) => {
       <YAxis
         tickFormatter={(price) => {
           if (price) {
-            const textPrice = Number(price).toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD"
-            });
-            return textPrice.slice(0, textPrice.indexOf("."));
+            return Math.trunc(price).toLocaleString();
           }
           return "--";
         }}
