@@ -1,18 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { Box, Stack, ButtonGroup, Button } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { selectedTickerState, priceChangeState } from "@/state";
-import { HistoryInterval } from "@/api";
+import {
+  selectedTickerState,
+  priceChangeState,
+  historyIntervalState,
+  intervalLabel
+} from "@/state";
 import { getHistory } from "@/api";
 import Loader from "../Loader";
 import Chart from "@/components/Chart";
-import { HistoryPoint, PriceChange } from "@/commonTypes";
+import { HistoryPoint, PriceChange, HistoryInterval } from "@/commonTypes";
 
 const TickerHistory = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
   const [priceChange, setPriceChange] = useRecoilState(priceChangeState);
-  const [selectedInterval, setSelectedInterval] = useState(HistoryInterval.Day);
+  const [{ value: selectedInterval }, setSelectedInterval] = useRecoilState(
+    historyIntervalState
+  );
+
+  const onSelectInterval = (newInterval: HistoryInterval) =>
+    setSelectedInterval({
+      value: newInterval,
+      label: intervalLabel[newInterval]
+    });
 
   const { data, status } = useQuery({
     queryKey: ["history", selectedTicker.id, selectedInterval],
@@ -56,14 +68,6 @@ const TickerHistory = () => {
     );
   }
 
-  const intervals: [HistoryInterval, string][] = [
-    [HistoryInterval.Day, "Day"],
-    [HistoryInterval.Week, "Week"],
-    [HistoryInterval.Month, "Month"],
-    [HistoryInterval.HalfYear, "Six Months"],
-    [HistoryInterval.Year, "Year"]
-  ];
-
   return (
     <>
       <ButtonGroup
@@ -72,18 +76,20 @@ const TickerHistory = () => {
         sx={{ marginTop: "1rem" }}
         fullWidth
       >
-        {intervals.map(([historyInterval, buttonText]) => (
-          <Button
-            variant={
-              selectedInterval === historyInterval ? "contained" : "outlined"
-            }
-            onClick={() => setSelectedInterval(historyInterval)}
-            fullWidth
-            key={historyInterval}
-          >
-            {buttonText}
-          </Button>
-        ))}
+        {Object.values(HistoryInterval).map(
+          (historyInterval: HistoryInterval) => (
+            <Button
+              variant={
+                selectedInterval === historyInterval ? "contained" : "outlined"
+              }
+              onClick={() => onSelectInterval(historyInterval)}
+              fullWidth
+              key={historyInterval}
+            >
+              {intervalLabel[historyInterval]}
+            </Button>
+          )
+        )}
       </ButtonGroup>
       <Box mt="1rem" mb="1rem">
         <Chart

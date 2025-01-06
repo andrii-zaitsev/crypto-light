@@ -37,3 +37,16 @@ export type PriceChange = {
   value: number;
   isGrowth: boolean;
 };
+
+export enum HistoryInterval {
+  Day = "m1",
+  Week = "m15",
+  Month = "h1",
+  HalfYear = "h6",
+  Year = "d1"
+}
+
+export type TickerHistoryInterval = {
+  value: HistoryInterval;
+  label: string;
+};
