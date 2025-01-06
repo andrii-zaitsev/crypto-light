@@ -64,21 +64,27 @@ const SelectedTicker = () => {
         <Stack
           direction="row"
           justifyContent="space-between"
-          alignItems="center"
+          alignItems="flex-start"
         >
-          <Typography
-            component="h1"
-            fontSize="2rem"
-            fontWeight="bold"
-            mr="0.5rem"
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            {selectedTicker.value}
-          </Typography>
+            <Typography
+              component="h1"
+              fontSize="2rem"
+              fontWeight="bold"
+              mr="0.5rem"
+            >
+              {selectedTicker.value}
+            </Typography>
+            <Typography component="h2" color="textDisabled" ml="0.5rem">
+              {data.name}
+            </Typography>
+          </Stack>
           <Price price={Number(data.priceUsd)} />
         </Stack>
-        <Typography component="h2" color="textDisabled">
-          {data.name}
-        </Typography>
         <TickerHistory />
         <Link href={data.explorer} underline="always" fontFamily="sans-serif">
           See More

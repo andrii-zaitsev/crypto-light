@@ -11,7 +11,7 @@ const Price = ({ price }: PriceProps) => {
   const { label: intervalLabel, value } = useRecoilValue(historyIntervalState);
   const isToday = value === HistoryInterval.Day;
   return (
-    <Stack alignItems="flex-start">
+    <Stack alignItems="flex-start" height="3.75rem">
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography component="span" fontSize="1.5rem">
           {Number(price).toLocaleString("en-US", {
@@ -23,7 +23,10 @@ const Price = ({ price }: PriceProps) => {
         <Typography ml="1.3rem">-1000</Typography>
       </Stack>
       {!isToday && (
-        <Typography>{`Past ${intervalLabel.toLowerCase()}`}</Typography>
+        <Typography
+          component="h2"
+          color="textDisabled"
+        >{`Past ${intervalLabel.toLowerCase()}`}</Typography>
       )}
     </Stack>
   );
