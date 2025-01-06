@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { Stack, Typography } from "@mui/material";
-import { historyIntervalState } from "@/state";
+import { priceChangeState, historyIntervalState } from "@/state";
 import { HistoryInterval } from "@/commonTypes";
 
 export type PriceProps = {
@@ -8,6 +8,7 @@ export type PriceProps = {
 };
 
 const Price = ({ price }: PriceProps) => {
+  const priceChange = useRecoilValue(priceChangeState);
   const { label: intervalLabel, value } = useRecoilValue(historyIntervalState);
   const isToday = value === HistoryInterval.Day;
   return (
@@ -20,7 +21,15 @@ const Price = ({ price }: PriceProps) => {
             minimumFractionDigits: 2
           })}
         </Typography>
-        <Typography ml="1.3rem">-1000</Typography>
+        <Typography
+          ml="1.3rem"
+          fontWeight="bold"
+          color={priceChange.isGrowth ? "#75d371" : "#eb5023"}
+        >
+          {`${priceChange.isGrowth ? "+" : "-"}${Math.abs(
+            priceChange.value
+          ).toFixed(2)}`}
+        </Typography>
       </Stack>
       {!isToday && (
         <Typography
