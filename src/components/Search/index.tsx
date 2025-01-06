@@ -11,7 +11,7 @@ const Search = () => {
   const [search, setSearch] = useRecoilState(searchState);
   const [mode, setMode] = useRecoilState(modeState);
   const queryClient = useQueryClient();
-  const searchRef = useRef();
+  const searchRef = useRef<HTMLInputElement | undefined>();
 
   useEffect(() => {
     const prefetchAssets = async () => {
@@ -25,7 +25,7 @@ const Search = () => {
 
   useEffect(() => {
     if (mode === Mode.Search) {
-      searchRef.current.focus();
+      searchRef.current?.focus();
     }
   }, [mode]);
 

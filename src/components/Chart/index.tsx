@@ -13,7 +13,9 @@ export type ChartProps = {
 const Chart = ({ data, isGrowth, dayTime = false }: ChartProps) => {
   const chartColor = isGrowth ? "#75d371" : "#eb5023";
 
-  const tooltipContent = useMemo(
+  const tooltipContent = useMemo<{
+    [key: number]: { price: string; date: string; dateFormatDay: string };
+  }>(
     () =>
       data.reduce(
         (content, current) => ({
@@ -53,9 +55,9 @@ const Chart = ({ data, isGrowth, dayTime = false }: ChartProps) => {
       <Tooltip
         active={window.innerWidth > 900}
         content={({ payload }) => {
-          const [currentPayload] = payload;
+          const [currentPayload] = payload || [];
           if (currentPayload?.payload) {
-            const { time } = currentPayload.payload;
+            const { time } = currentPayload.payload as { time: number };
             return (
               <Stack>
                 <Typography>{tooltipContent[time].price}</Typography>
