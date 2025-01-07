@@ -71,6 +71,8 @@ const TickerListItem = ({ ticker }: TickerProps) => {
     return null;
   }
 
+  console.log({ data });
+
   const percentChange = Number(data.changePercent24Hr);
   const isGrowth = percentChange === Math.abs(percentChange);
 
@@ -96,7 +98,7 @@ const TickerListItem = ({ ticker }: TickerProps) => {
       </ListItemText>
       <Stack alignItems="flex-end">
         <Typography component="span" fontWeight="bold">
-          {Number(data.priceUsd).toFixed(2)}
+          {Number(Number(data.priceUsd).toFixed(2)).toLocaleString()}
         </Typography>
         <Typography
           component="span"
