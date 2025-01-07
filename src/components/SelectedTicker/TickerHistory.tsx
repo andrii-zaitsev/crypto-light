@@ -62,7 +62,7 @@ const TickerHistory = () => {
 
   if (status === "pending" || data === undefined) {
     return (
-      <Stack alignItems="center" pt="15rem">
+      <Stack alignItems="center">
         <Loader />
       </Stack>
     );

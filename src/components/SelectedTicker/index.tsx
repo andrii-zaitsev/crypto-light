@@ -60,7 +60,7 @@ const SelectedTicker = () => {
           </Button>
         )}
       </Box>
-      <Box marginLeft="auto" marginRight="auto" mt="3rem">
+      <Box marginLeft="auto" marginRight="auto" mt="3rem" width="72%">
         <Stack
           direction="row"
           justifyContent="space-between"
