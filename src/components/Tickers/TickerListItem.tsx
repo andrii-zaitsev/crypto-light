@@ -71,8 +71,6 @@ const TickerListItem = ({ ticker }: TickerProps) => {
     return null;
   }
 
-  console.log({ data });
-
   const percentChange = Number(data.changePercent24Hr);
   const isGrowth = percentChange === Math.abs(percentChange);
 
