@@ -16,6 +16,7 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { getAssets } from "@/api";
 import { searchState, tickersState, selectedTickerState } from "@/state";
+import { saveTicker, removeTicker } from "@/storage";
 
 const SearchTickers = () => {
   const search = useRecoilValue(searchState);
@@ -45,6 +46,21 @@ const SearchTickers = () => {
     estimateSize: () => 72,
     overscan: 5
   });
+
+  const onAdd = (tickerId: string, tickerSymbol: string) => {
+    setTickers((prevTickers) => [
+      ...prevTickers,
+      { id: tickerId, value: tickerSymbol }
+    ]);
+    saveTicker(tickerId);
+  };
+
+  const onRemove = (tickerId: string) => {
+    setTickers((prevTickers) =>
+      prevTickers.filter((savedTicker) => savedTicker.id !== tickerId)
+    );
+    removeTicker(tickerId);
+  };
 
   return (
     <Box
@@ -90,13 +106,7 @@ const SearchTickers = () => {
                 <ListItemIcon>
                   {isSelected ? (
                     <IconButton
-                      onClick={() =>
-                        setTickers((prevTickers) =>
-                          prevTickers.filter(
-                            (savedTicker) => savedTicker.id !== ticker.id
-                          )
-                        )
-                      }
+                      onClick={() => onRemove(ticker.id)}
                       sx={{
                         paddingLeft: 0,
                         "&:hover": { backgroundColor: "transparent" }
@@ -106,12 +116,7 @@ const SearchTickers = () => {
                     </IconButton>
                   ) : (
                     <IconButton
-                      onClick={() =>
-                        setTickers((prevTickers) => [
-                          ...prevTickers,
-                          { id: ticker.id, value: ticker.symbol }
-                        ])
-                      }
+                      onClick={() => onAdd(ticker.id, ticker.symbol)}
                       sx={{
                         paddingLeft: 0,
                         "&:hover": { backgroundColor: "transparent" }
