@@ -6,6 +6,7 @@ import { getTicker } from "@/api";
 import Loader from "@/components/Loader";
 import TickerHistory from "./TickerHistory";
 import Price from "./Price";
+import { saveTicker, removeTicker } from "@/storage";
 
 const SelectedTicker = () => {
   const selectedTicker = useRecoilValue(selectedTickerState);
@@ -26,6 +27,18 @@ const SelectedTicker = () => {
 
   const isSaved = !!tickers.find((ticker) => ticker.id === selectedTicker.id);
 
+  const onAdd = () => {
+    setTickers((prevTickers) => [...prevTickers, selectedTicker]);
+    saveTicker(selectedTicker.id);
+  };
+
+  const onRemove = () => {
+    setTickers((prevTickers) =>
+      prevTickers.filter((ticker) => ticker.id !== selectedTicker.id)
+    );
+    removeTicker(selectedTicker.id);
+  };
+
   return (
     <Stack>
       <Box
@@ -37,25 +50,11 @@ const SelectedTicker = () => {
         }}
       >
         {isSaved ? (
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() =>
-              setTickers((prevTickers) =>
-                prevTickers.filter((ticker) => ticker.id !== selectedTicker.id)
-              )
-            }
-          >
+          <Button variant="contained" color="error" onClick={onRemove}>
             Remove
           </Button>
         ) : (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() =>
-              setTickers((prevTickers) => [...prevTickers, selectedTicker])
-            }
-          >
+          <Button variant="contained" color="primary" onClick={onAdd}>
             Add
           </Button>
         )}
