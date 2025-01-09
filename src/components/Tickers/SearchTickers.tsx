@@ -17,6 +17,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { getAssets } from "@/api";
 import { searchState, tickersState, selectedTickerState } from "@/state";
 import { saveTicker, removeTicker } from "@/storage";
+import { Ticker } from "@/commonTypes";
 
 const SearchTickers = () => {
   const search = useRecoilValue(searchState);
@@ -47,19 +48,16 @@ const SearchTickers = () => {
     overscan: 5
   });
 
-  const onAdd = (tickerId: string, tickerSymbol: string) => {
-    setTickers((prevTickers) => [
-      ...prevTickers,
-      { id: tickerId, value: tickerSymbol }
-    ]);
-    saveTicker(tickerId);
+  const onAdd = (ticker: Ticker) => {
+    setTickers((prevTickers) => [...prevTickers, ticker]);
+    saveTicker(ticker);
   };
 
-  const onRemove = (tickerId: string) => {
+  const onRemove = (ticker: Ticker) => {
     setTickers((prevTickers) =>
-      prevTickers.filter((savedTicker) => savedTicker.id !== tickerId)
+      prevTickers.filter((savedTicker) => savedTicker.id !== ticker.id)
     );
-    removeTicker(tickerId);
+    removeTicker(ticker);
   };
 
   return (
@@ -106,7 +104,9 @@ const SearchTickers = () => {
                 <ListItemIcon>
                   {isSelected ? (
                     <IconButton
-                      onClick={() => onRemove(ticker.id)}
+                      onClick={() =>
+                        onRemove({ id: ticker.id, value: ticker.symbol })
+                      }
                       sx={{
                         paddingLeft: 0,
                         "&:hover": { backgroundColor: "transparent" }
@@ -116,7 +116,9 @@ const SearchTickers = () => {
                     </IconButton>
                   ) : (
                     <IconButton
-                      onClick={() => onAdd(ticker.id, ticker.symbol)}
+                      onClick={() =>
+                        onAdd({ id: ticker.id, value: ticker.symbol })
+                      }
                       sx={{
                         paddingLeft: 0,
                         "&:hover": { backgroundColor: "transparent" }
