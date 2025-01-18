@@ -11,7 +11,7 @@ const Header = () => {
         mr="1rem"
         sx={(theme) => ({
           display: "block",
-          [theme.breakpoints.up("sm")]: {
+          [theme.breakpoints.up("md")]: {
             display: "none"
           }
         })}

@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import Header from "@/components/Header";
 import Search from "@/components/Search";
 import SelectedTicker from "./components/SelectedTicker";
@@ -10,13 +10,25 @@ const App = () => {
       <Header />
       <main>
         <Stack direction="row">
-          <aside style={{ width: "350px", minWidth: "350px" }}>
+          <Box
+            sx={(theme) => ({
+              width: "100%",
+              [theme.breakpoints.up("md")]: { width: "350px" }
+            })}
+          >
             <Search />
             <Tickers />
-          </aside>
-          <section style={{ width: "100%" }}>
+          </Box>
+          <Box
+            component="section"
+            width="100%"
+            sx={(theme) => ({
+              display: "none",
+              [theme.breakpoints.up("md")]: { display: "block" }
+            })}
+          >
             <SelectedTicker />
-          </section>
+          </Box>
         </Stack>
       </main>
     </div>
