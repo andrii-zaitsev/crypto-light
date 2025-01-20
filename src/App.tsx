@@ -1,10 +1,21 @@
+import { useState, useEffect } from "react";
 import { Stack, Box } from "@mui/material";
 import Header from "@/components/Header";
 import Search from "@/components/Search";
-import SelectedTicker from "./components/SelectedTicker";
+import SelectedTicker from "@/components/SelectedTicker";
+import MobileSelectedTicker from "@/components/MobileSelectedTicker.tsx";
 import Tickers from "@/components/Tickers";
 
 const App = () => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    if (!window.onresize) {
+      window.onresize = ({ currentTarget }) =>
+        setScreenWidth(currentTarget.innerWidth);
+    }
+  }, []);
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Header />
@@ -19,16 +30,13 @@ const App = () => {
             <Search />
             <Tickers />
           </Box>
-          <Box
-            component="section"
-            width="100%"
-            sx={(theme) => ({
-              display: "none",
-              [theme.breakpoints.up("md")]: { display: "block" }
-            })}
-          >
-            <SelectedTicker />
-          </Box>
+          {screenWidth > 900 ? (
+            <Box component="section" width="100%">
+              <SelectedTicker />
+            </Box>
+          ) : (
+            <MobileSelectedTicker />
+          )}
         </Stack>
       </main>
     </div>
