@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
 import { Stack, Box } from "@mui/material";
 import Header from "@/components/Header";
 import Search from "@/components/Search";
 import SelectedTicker from "@/components/SelectedTicker";
 import MobileSelectedTicker from "@/components/MobileSelectedTicker.tsx";
 import Tickers from "@/components/Tickers";
+import { displayMobileSelectedTickerState } from "@/state";
 
 const App = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const displayMobileTicker = useRecoilValue(displayMobileSelectedTickerState);
 
   useEffect(() => {
     if (!window.onresize) {
@@ -18,8 +21,8 @@ const App = () => {
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <Header />
-      <main>
+      {!displayMobileTicker && <Header />}
+      <main style={{ display: displayMobileTicker ? "none" : "block" }}>
         <Stack direction="row">
           <Box
             sx={(theme) => ({
@@ -30,15 +33,14 @@ const App = () => {
             <Search />
             <Tickers />
           </Box>
-          {screenWidth > 900 ? (
+          {screenWidth >= 900 && (
             <Box component="section" width="100%">
               <SelectedTicker />
             </Box>
-          ) : (
-            <MobileSelectedTicker />
           )}
         </Stack>
       </main>
+      {screenWidth < 900 && displayMobileTicker && <MobileSelectedTicker />}
     </div>
   );
 };

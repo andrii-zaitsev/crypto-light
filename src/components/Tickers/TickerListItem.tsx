@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import {
   ListItem,
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { getTicker } from "@/api";
 import Loader from "@/components/Loader";
-import { selectedTickerState } from "@/state";
+import { selectedTickerState, displayMobileSelectedTickerState } from "@/state";
 import { Ticker } from "@/commonTypes";
 import { TokenIcon } from "@web3icons/react";
 
@@ -20,7 +20,13 @@ export type TickerProps = {
 
 const TickerListItem = ({ ticker }: TickerProps) => {
   const [selectedTicker, selectTicker] = useRecoilState(selectedTickerState);
-  const onSelect = () => selectTicker(ticker);
+  const setDisplayMobileSelectedTicker = useSetRecoilState(
+    displayMobileSelectedTickerState
+  );
+  const onSelect = () => {
+    selectTicker(ticker);
+    setDisplayMobileSelectedTicker(true);
+  };
 
   const { data, status } = useQuery({
     queryKey: ["tickerId", ticker.id],

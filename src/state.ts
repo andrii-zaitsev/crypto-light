@@ -50,3 +50,8 @@ export const historyIntervalState = atom<TickerHistoryInterval>({
     label: intervalLabel[HistoryInterval.Day]
   }
 });
+
+export const displayMobileSelectedTickerState = atom<boolean>({
+  key: "displayMobileSelectedTicker",
+  default: false
+});
