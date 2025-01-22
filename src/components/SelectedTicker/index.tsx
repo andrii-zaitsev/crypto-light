@@ -63,7 +63,7 @@ const SelectedTicker = () => {
         mt="3rem"
         width="72%"
         sx={(theme) => ({
-          marginLeft: "1rem",
+          marginLeft: "4rem",
           marginRight: 0,
           [theme.breakpoints.up("lg")]: {
             marginLeft: "auto",

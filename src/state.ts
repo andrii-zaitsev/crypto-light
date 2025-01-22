@@ -36,11 +36,11 @@ export const priceChangeState = atom<PriceChange>({
 });
 
 export const intervalLabel: Record<HistoryInterval, string> = {
-  [HistoryInterval.Day]: "Day",
-  [HistoryInterval.Week]: "Week",
-  [HistoryInterval.Month]: "Month",
-  [HistoryInterval.HalfYear]: "Six Months",
-  [HistoryInterval.Year]: "Year"
+  [HistoryInterval.Day]: "1D",
+  [HistoryInterval.Week]: "1W",
+  [HistoryInterval.Month]: "1M",
+  [HistoryInterval.HalfYear]: "6M",
+  [HistoryInterval.Year]: "1Y"
 };
 
 export const historyIntervalState = atom<TickerHistoryInterval>({

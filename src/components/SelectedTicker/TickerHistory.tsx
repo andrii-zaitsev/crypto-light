@@ -73,8 +73,7 @@ const TickerHistory = () => {
       <ButtonGroup
         variant="outlined"
         aria-label="Basic button group"
-        sx={{ marginTop: "1rem" }}
-        fullWidth
+        sx={{ marginTop: "1rem", width: "110%" }}
       >
         {Object.values(HistoryInterval).map(
           (historyInterval: HistoryInterval) => (
