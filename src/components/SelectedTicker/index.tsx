@@ -59,7 +59,18 @@ const SelectedTicker = () => {
           </Button>
         )}
       </Box>
-      <Box marginLeft="auto" marginRight="auto" mt="3rem" width="72%">
+      <Box
+        mt="3rem"
+        width="72%"
+        sx={(theme) => ({
+          marginLeft: "1rem",
+          marginRight: 0,
+          [theme.breakpoints.up("lg")]: {
+            marginLeft: "auto",
+            marginRight: "auto"
+          }
+        })}
+      >
         <Stack
           direction="row"
           justifyContent="space-between"
