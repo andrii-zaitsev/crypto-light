@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { Stack, Box } from "@mui/material";
 import Header from "@/components/Header";
 import Search from "@/components/Search";
@@ -10,7 +10,9 @@ import { displayMobileSelectedTickerState } from "@/state";
 
 const App = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const displayMobileTicker = useRecoilValue(displayMobileSelectedTickerState);
+  const [displayMobileTicker, setDisplayMobileTicker] = useRecoilState(
+    displayMobileSelectedTickerState
+  );
 
   useEffect(() => {
     if (!window.onresize) {
@@ -18,6 +20,12 @@ const App = () => {
         setScreenWidth(currentTarget.innerWidth);
     }
   }, []);
+
+  useEffect(() => {
+    if (screenWidth >= 900 && displayMobileTicker) {
+      setDisplayMobileTicker(false);
+    }
+  }, [screenWidth, displayMobileTicker, setDisplayMobileTicker]);
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
