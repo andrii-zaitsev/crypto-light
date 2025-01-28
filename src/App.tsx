@@ -16,8 +16,7 @@ const App = () => {
 
   useEffect(() => {
     if (!window.onresize) {
-      window.onresize = ({ currentTarget }) =>
-        setScreenWidth(currentTarget.innerWidth);
+      window.onresize = () => setScreenWidth(window.innerWidth);
     }
   }, []);
 

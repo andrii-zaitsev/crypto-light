@@ -28,14 +28,12 @@ const SelectedTicker = () => {
   const isSaved = !!tickers.find((ticker) => ticker.id === selectedTicker.id);
 
   const onAdd = () => {
-    setTickers((prevTickers) => [...prevTickers, selectedTicker]);
+    setTickers(prev => [...prev, selectedTicker]);
     saveTicker(selectedTicker);
   };
 
   const onRemove = () => {
-    setTickers((prevTickers) =>
-      prevTickers.filter((ticker) => ticker.id !== selectedTicker.id)
-    );
+    setTickers(prev => prev.filter(t => t.id !== selectedTicker.id));
     removeTicker(selectedTicker);
   };
 
