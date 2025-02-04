@@ -27,7 +27,7 @@ const App = () => {
   }, [screenWidth, displayMobileTicker, setDisplayMobileTicker]);
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <Box width="100%" height="100%">
       {!displayMobileTicker && <Header />}
       <main style={{ display: displayMobileTicker ? "none" : "block" }}>
         <Stack direction="row">
@@ -48,7 +48,7 @@ const App = () => {
         </Stack>
       </main>
       {screenWidth < 900 && displayMobileTicker && <MobileSelectedTicker />}
-    </div>
+    </Box>
   );
 };
 
