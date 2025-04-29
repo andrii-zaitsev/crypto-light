@@ -3,6 +3,7 @@ import { Card, Table } from "@radix-ui/themes";
 const YourWatchlistTable = () => {
   return (
     <Card>
+      <h2>Your Watchlist</h2>
       <Table.Root>
         <Table.Header>
           <Table.Row>

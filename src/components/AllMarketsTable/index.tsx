@@ -3,6 +3,7 @@ import { Card, Table } from "@radix-ui/themes";
 const AllMarketsTable = () => {
   return (
     <Card>
+      <h2>Top Cryptocurrencies</h2>
       <Table.Root>
         <Table.Header>
           <Table.Row>
