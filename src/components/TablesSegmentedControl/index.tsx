@@ -1,14 +1,23 @@
 import { SegmentedControl } from "@radix-ui/themes";
 
-const TablesSegmentedControl = () => {
+export type TablesSegmentedControlProps = {
+  options: { value: string; label: string }[];
+  value: string;
+  onValueChange: (newValue: unknown) => void;
+};
+
+const TablesSegmentedControl = ({
+  options,
+  value,
+  onValueChange
+}: TablesSegmentedControlProps) => {
   return (
-    <SegmentedControl.Root defaultValue="All Markets">
-      <SegmentedControl.Item value="All Markets">
-        All Markets
-      </SegmentedControl.Item>
-      <SegmentedControl.Item value="Your Watchlist">
-        Your Watchlist
-      </SegmentedControl.Item>
+    <SegmentedControl.Root value={value} onValueChange={onValueChange}>
+      {options.map(({ label, value }) => (
+        <SegmentedControl.Item key={value} value={value}>
+          {label}
+        </SegmentedControl.Item>
+      ))}
     </SegmentedControl.Root>
   );
 };
