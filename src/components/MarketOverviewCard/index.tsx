@@ -1,5 +1,7 @@
+import { Card } from "@radix-ui/themes";
+
 const MarketOverviewCard = () => {
-  return <div>Market Overview Card</div>;
+  return <Card>Market Overview Card</Card>;
 };
 
 export default MarketOverviewCard;

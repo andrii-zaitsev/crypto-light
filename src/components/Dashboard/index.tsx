@@ -11,10 +11,10 @@ const Dashboard = () => {
         <BarChartIcon width={40} height={40} color="#22c55e" />
         <h1>CryptoLight</h1>
       </Flex>
-      <div>
+      <Flex>
         <MarketSentimentCard />
         <MarketOverviewCard />
-      </div>
+      </Flex>
       <MarketTables />
     </Container>
   );
