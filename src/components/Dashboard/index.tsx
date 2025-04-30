@@ -1,18 +1,20 @@
+import { BarChartIcon } from "@radix-ui/react-icons";
+import { Container, Flex, Heading, Box } from "@radix-ui/themes";
 import MarketTables from "@/components/MarketTables";
 import MarketSentimentCard from "@/components/MarketSentimentCard";
 import MarketOverviewCard from "@/components/MarketOverviewCard";
-import { BarChartIcon } from "@radix-ui/react-icons";
-import { Container, Flex } from "@radix-ui/themes";
 
 const Dashboard = () => {
   return (
-    <Container>
-      <Flex align="center" gap="2">
+    <Container size="3">
+      <Flex align="center" gap="2" mt="2rem" mb="2rem">
         <BarChartIcon width={40} height={40} color="#22c55e" />
-        <h1>CryptoLight</h1>
+        <Heading as="h1">CryptoLight</Heading>
       </Flex>
       <Flex>
-        <MarketSentimentCard />
+        <Box maxWidth="27rem">
+          <MarketSentimentCard />
+        </Box>
         <MarketOverviewCard />
       </Flex>
       <MarketTables />

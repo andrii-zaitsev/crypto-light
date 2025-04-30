@@ -1,9 +1,9 @@
-import { Card, Table } from "@radix-ui/themes";
+import { Card, Heading, Table } from "@radix-ui/themes";
 
 const YourWatchlistTable = () => {
   return (
     <Card>
-      <h2>Your Watchlist</h2>
+      <Heading as="h3">Your Watchlist</Heading>
       <Table.Root>
         <Table.Header>
           <Table.Row>
