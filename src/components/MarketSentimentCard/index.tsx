@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Card, Heading, Text, Flex } from "@radix-ui/themes";
+import TrafficLight from "./TrafficLight";
 import SentimentText from "./SentimentText";
-
-enum Sentiment {
-  Bad = "Bad",
-  Neutral = "Neutral",
-  Good = "Good"
-}
+import { Sentiment } from "@/commonTypes";
 
 const MarketSentimentCard = () => {
   const [sentiment, setSentiment] = useState<Sentiment>(Sentiment.Good);
@@ -30,7 +26,7 @@ const MarketSentimentCard = () => {
         Current market conditions
       </Text>
       <Flex align="center" gap="1.5rem">
-        <div>light</div>
+        <TrafficLight sentiment={sentiment} />
         {sentiment === Sentiment.Good && (
           <SentimentText
             header="Good"

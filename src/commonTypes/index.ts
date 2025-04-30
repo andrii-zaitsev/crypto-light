@@ -1,3 +1,9 @@
+export enum Sentiment {
+  Bad = "Bad",
+  Neutral = "Neutral",
+  Good = "Good"
+}
+
 export type Ticker = {
   id: string;
   value: string;
