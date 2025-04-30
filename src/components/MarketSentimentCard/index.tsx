@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Card, Heading, Text, Flex, Box } from "@radix-ui/themes";
+import { Card, Heading, Text, Flex } from "@radix-ui/themes";
+import SentimentText from "./SentimentText";
 
 enum Sentiment {
   Bad = "Bad",
@@ -31,46 +32,29 @@ const MarketSentimentCard = () => {
       <Flex align="center" gap="1.5rem">
         <div>light</div>
         {sentiment === Sentiment.Good && (
-          <Box>
-            <Heading as="h5" style={{ color: "#4ade80" }} mb="0.5rem">
-              Good
-            </Heading>
-            <Text as="p" style={{ color: "#4ade80" }} weight="medium">
-              The financial mood is upbeat! The market's on a steady rise, which
-              could open up some solid opportunities for business and investing.
-            </Text>
-          </Box>
-        )}
-        {sentiment === Sentiment.Bad && (
-          <Box>
-            <Heading as="h5" style={{ color: "#f87171" }} mb="0.5rem">
-              Bad
-            </Heading>
-            <Text as="p" style={{ color: "#f87171" }} weight="medium">
-              Heads up: The market is dropping. This might be a sign to be extra
-              careful with your money moves. If you were thinking about big
-              spending or investments, holding off could be a smart call.
-            </Text>
-          </Box>
+          <SentimentText
+            header="Good"
+            text="The financial mood is upbeat! The market's on a steady rise, which
+              could open up some solid opportunities for business and investing."
+            color="#4ade80"
+          />
         )}
         {sentiment === Sentiment.Neutral && (
-          <Box>
-            <Heading
-              as="h5"
-              style={{ color: /*"#facc15"*/ "#e3b600" }}
-              mb="0.5rem"
-            >
-              Neutral
-            </Heading>
-            <Text
-              as="p"
-              style={{ color: /*"#facc15"*/ "#e3b600" }}
-              weight="medium"
-            >
-              Markets are stuck in 'wait-and-see' mode. No major swings yet, but
-              don't zone out—trends could flip fast!
-            </Text>
-          </Box>
+          <SentimentText
+            header="Neutral"
+            text="Markets are stuck in 'wait-and-see' mode. No major swings yet, but
+              don't zone out—trends could flip fast!"
+            color="#e3b600"
+          />
+        )}
+        {sentiment === Sentiment.Bad && (
+          <SentimentText
+            header="Bad"
+            text="Heads up: The market is dropping. This might be a sign to be extra
+          careful with your money moves. If you were thinking about big
+          spending or investments, holding off could be a smart call."
+            color="#f87171"
+          />
         )}
       </Flex>
     </Card>
