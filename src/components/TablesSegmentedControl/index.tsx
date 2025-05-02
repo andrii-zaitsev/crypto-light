@@ -12,7 +12,11 @@ const TablesSegmentedControl = ({
   onValueChange
 }: TablesSegmentedControlProps) => {
   return (
-    <SegmentedControl.Root value={value} onValueChange={onValueChange}>
+    <SegmentedControl.Root
+      value={value}
+      onValueChange={onValueChange}
+      mb="2rem"
+    >
       {options.map(({ label, value }) => (
         <SegmentedControl.Item key={value} value={value}>
           {label}

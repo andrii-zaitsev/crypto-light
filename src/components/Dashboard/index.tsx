@@ -11,7 +11,7 @@ const Dashboard = () => {
         <BarChartIcon width={40} height={40} color="#22c55e" />
         <Heading as="h1">CryptoLight</Heading>
       </Flex>
-      <Flex>
+      <Flex mb="2rem">
         <Box maxWidth="27rem">
           <MarketSentimentCard />
         </Box>

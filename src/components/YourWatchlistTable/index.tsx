@@ -1,9 +1,14 @@
-import { Card, Heading, Table } from "@radix-ui/themes";
+import { Card, Heading, Text, Table } from "@radix-ui/themes";
 
 const YourWatchlistTable = () => {
   return (
-    <Card>
-      <Heading as="h3">Your Watchlist</Heading>
+    <Card size="3">
+      <Heading as="h3" mb="0.5rem">
+        Your Watchlist
+      </Heading>
+      <Text as="p" color="gray" mb="0.5rem">
+        Cryptocurrencies you're tracking
+      </Text>
       <Table.Root>
         <Table.Header>
           <Table.Row>

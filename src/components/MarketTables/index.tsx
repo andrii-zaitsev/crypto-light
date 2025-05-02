@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Box } from "@radix-ui/themes";
 import TablesSegmentedControl from "@/components/TablesSegmentedControl";
 import AllMarketsTable from "@/components/AllMarketsTable";
 import YourWatchlistTable from "@/components/YourWatchlistTable";
@@ -11,7 +12,7 @@ enum View {
 const MarketTables = () => {
   const [view, setView] = useState<View>(View.All);
   return (
-    <div>
+    <Box mb="2rem">
       <TablesSegmentedControl
         value={view}
         options={[
@@ -22,7 +23,7 @@ const MarketTables = () => {
       />
       {view === View.All && <AllMarketsTable />}
       {view === View.Saved && <YourWatchlistTable />}
-    </div>
+    </Box>
   );
 };
 

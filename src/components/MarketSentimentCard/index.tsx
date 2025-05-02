@@ -21,7 +21,9 @@ const MarketSentimentCard = () => {
   return (
     <Card size="3">
       <button onClick={handleSetimentChange}>change</button>
-      <Heading as="h3">Market Sentiment</Heading>
+      <Heading as="h3" mb="0.5rem">
+        Market Sentiment
+      </Heading>
       <Text as="p" color="gray" mb="1.5rem">
         Current market conditions
       </Text>
