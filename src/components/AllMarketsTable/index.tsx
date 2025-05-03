@@ -1,5 +1,7 @@
-import { Card, Heading, Text, Table, Button, Link } from "@radix-ui/themes";
+import { Card, Heading, Text, Table, Link, Flex } from "@radix-ui/themes";
+import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
 
+// we can create component for two tables
 const AllMarketsTable = () => {
   return (
     <Card size="3">
@@ -26,7 +28,12 @@ const AllMarketsTable = () => {
             <Table.Cell>1</Table.Cell>
             <Table.Cell>Bitcoin</Table.Cell>
             <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
+            <Table.Cell>
+              <Flex align="center">
+                <ArrowUpIcon color="#4ade80" />
+                <Text style={{ color: "#4ade80" }}>2.34%</Text>
+              </Flex>
+            </Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
             <Table.Cell>
@@ -39,7 +46,12 @@ const AllMarketsTable = () => {
             <Table.Cell>2</Table.Cell>
             <Table.Cell>Ethereum</Table.Cell>
             <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
+            <Table.Cell>
+              <Flex align="center">
+                <ArrowDownIcon color="#f87171" />
+                <Text style={{ color: "#f87171" }}>2.34%</Text>
+              </Flex>
+            </Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
             <Table.Cell>

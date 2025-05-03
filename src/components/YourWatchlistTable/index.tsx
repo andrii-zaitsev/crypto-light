@@ -1,5 +1,6 @@
 import { Card, Heading, Text, Table, Link } from "@radix-ui/themes";
 
+// we can create component for two tables
 const YourWatchlistTable = () => {
   return (
     <Card size="3">
