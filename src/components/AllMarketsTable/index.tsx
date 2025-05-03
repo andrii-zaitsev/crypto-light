@@ -1,4 +1,4 @@
-import { Card, Heading, Text, Table } from "@radix-ui/themes";
+import { Card, Heading, Text, Table, Button, Link } from "@radix-ui/themes";
 
 const AllMarketsTable = () => {
   return (
@@ -18,6 +18,7 @@ const AllMarketsTable = () => {
             <Table.ColumnHeaderCell>24h Change</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Market Cap</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Volume(24h)</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Original source</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -28,6 +29,11 @@ const AllMarketsTable = () => {
             <Table.Cell>2.34%</Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
+            <Table.Cell>
+              <Link href="https://www.coincap.io/" target="_blank">
+                See more
+              </Link>
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>2</Table.Cell>
@@ -36,6 +42,11 @@ const AllMarketsTable = () => {
             <Table.Cell>2.34%</Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
+            <Table.Cell>
+              <Link href="https://www.coincap.io/" target="_blank">
+                See more
+              </Link>
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>3</Table.Cell>
@@ -44,6 +55,11 @@ const AllMarketsTable = () => {
             <Table.Cell>2.34%</Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
+            <Table.Cell>
+              <Link href="https://www.coincap.io/" target="_blank">
+                See more
+              </Link>
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>3</Table.Cell>
@@ -52,6 +68,11 @@ const AllMarketsTable = () => {
             <Table.Cell>2.34%</Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
+            <Table.Cell>
+              <Link href="https://www.coincap.io/" target="_blank">
+                See more
+              </Link>
+            </Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table.Root>

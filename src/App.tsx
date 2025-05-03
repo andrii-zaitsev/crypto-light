@@ -54,7 +54,17 @@
 
 // export default App;
 import Dashboard from "@/components/Dashboard";
+import { useQuery } from "@tanstack/react-query";
+import { getAssets } from "./api";
+
 const App = () => {
+  const { data = [] } = useQuery({
+    queryKey: ["assets"],
+    queryFn: getAssets
+  });
+
+  console.log({ data });
+
   return <Dashboard />;
 };
 
