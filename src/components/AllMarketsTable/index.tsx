@@ -1,5 +1,4 @@
 import { Card, Heading, Text, Table, Link, Flex } from "@radix-ui/themes";
-import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
 import DayPriceChangeText from "../PriceChangeText";
 
 // we can create component for two tables

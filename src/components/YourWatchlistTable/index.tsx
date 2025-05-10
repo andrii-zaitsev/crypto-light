@@ -1,4 +1,5 @@
 import { Card, Heading, Text, Table, Link } from "@radix-ui/themes";
+import DayPriceChangeText from "../PriceChangeText";
 
 // we can create component for two tables
 const YourWatchlistTable = () => {
@@ -27,7 +28,9 @@ const YourWatchlistTable = () => {
             <Table.Cell>1</Table.Cell>
             <Table.Cell>Ethereum</Table.Cell>
             <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
+            <Table.Cell>
+              <DayPriceChangeText value="2.34" isGrowth={false} />
+            </Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
             <Table.Cell>
@@ -40,7 +43,9 @@ const YourWatchlistTable = () => {
             <Table.Cell>2</Table.Cell>
             <Table.Cell>Solana</Table.Cell>
             <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
+            <Table.Cell>
+              <DayPriceChangeText value="2.34" isGrowth={true} />
+            </Table.Cell>
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
             <Table.Cell>
