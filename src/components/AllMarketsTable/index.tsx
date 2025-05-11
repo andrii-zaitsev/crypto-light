@@ -1,4 +1,5 @@
 import { Card, Heading, Text, Table, Link, Flex } from "@radix-ui/themes";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import DayPriceChangeText from "../PriceChangeText";
 
 // we can create component for two tables
@@ -34,9 +35,14 @@ const AllMarketsTable = () => {
             <Table.Cell>$1.35T</Table.Cell>
             <Table.Cell>$28.77B</Table.Cell>
             <Table.Cell>
-              <Link href="https://www.coincap.io/" target="_blank">
-                See more
-              </Link>
+              <Flex align="center">
+                <Link href="https://www.coincap.io/" target="_blank">
+                  <Flex align="center">
+                    <Text>See more</Text>
+                    <ArrowTopRightIcon />
+                  </Flex>
+                </Link>
+              </Flex>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
