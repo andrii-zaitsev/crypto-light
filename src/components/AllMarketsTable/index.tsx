@@ -13,10 +13,15 @@ import { CryptoAsset } from "@/commonTypes";
 
 type AllMarketsTableProps = {
   coinsList: CryptoAsset[];
+  savedCoins: string[];
   saveCoin: (selectedCoin: string) => void;
 };
 
-const AllMarketsTable = ({ coinsList, saveCoin }: AllMarketsTableProps) => {
+const AllMarketsTable = ({
+  coinsList,
+  savedCoins,
+  saveCoin
+}: AllMarketsTableProps) => {
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
@@ -89,45 +94,19 @@ const AllMarketsTable = ({ coinsList, saveCoin }: AllMarketsTableProps) => {
                   </Flex>
                 </Table.Cell>
                 <Table.Cell>
-                  <Button onClick={() => saveCoin(name)}>
-                    Add to watchlist
-                  </Button>
+                  {savedCoins.includes(name) ? (
+                    <Text style={{ fontStyle: "italic" }}>
+                      Added to watchlist
+                    </Text>
+                  ) : (
+                    <Button onClick={() => saveCoin(name)}>
+                      Add to watchlist
+                    </Button>
+                  )}
                 </Table.Cell>
               </Table.Row>
             )
           )}
-          <Table.Row>
-            <Table.Cell>3</Table.Cell>
-            <Table.Cell>Solana</Table.Cell>
-            <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
-            <Table.Cell>$1.35T</Table.Cell>
-            <Table.Cell>$28.77B</Table.Cell>
-            <Table.Cell>
-              <Link href="https://www.coincap.io/" target="_blank">
-                See more
-              </Link>
-            </Table.Cell>
-            <Table.Cell>
-              <Text style={{ fontStyle: "italic" }}>Added to watchlist</Text>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>3</Table.Cell>
-            <Table.Cell>Ripple</Table.Cell>
-            <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
-            <Table.Cell>$1.35T</Table.Cell>
-            <Table.Cell>$28.77B</Table.Cell>
-            <Table.Cell>
-              <Link href="https://www.coincap.io/" target="_blank">
-                See more
-              </Link>
-            </Table.Cell>
-            <Table.Cell>
-              <Button>Add to watchlist</Button>
-            </Table.Cell>
-          </Table.Row>
         </Table.Body>
       </Table.Root>
     </Card>

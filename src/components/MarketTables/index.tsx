@@ -53,7 +53,11 @@ const MarketTables = () => {
         onValueChange={(newView) => setView(newView as View)}
       />
       {view === View.All && (
-        <AllMarketsTable coinsList={data} saveCoin={saveCoin} />
+        <AllMarketsTable
+          coinsList={data}
+          savedCoins={savedCoins}
+          saveCoin={saveCoin}
+        />
       )}
       {view === View.Saved && (
         <YourWatchlistTable savedCoins={savedAssets} removeCoin={removeCoin} />
