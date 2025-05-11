@@ -58,12 +58,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getAssets } from "./api";
 
 const App = () => {
-  const { data = [] } = useQuery({
-    queryKey: ["assets"],
-    queryFn: getAssets
-  });
-
-  console.log({ data });
+  // const { data = [] } = useQuery({
+  //   queryKey: ["assets"],
+  //   queryFn: getAssets
+  // });
 
   return <Dashboard />;
 };
