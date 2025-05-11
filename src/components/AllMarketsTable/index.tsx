@@ -1,4 +1,12 @@
-import { Card, Heading, Text, Table, Link, Flex } from "@radix-ui/themes";
+import {
+  Card,
+  Heading,
+  Text,
+  Table,
+  Link,
+  Flex,
+  Button
+} from "@radix-ui/themes";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import DayPriceChangeText from "../PriceChangeText";
 
@@ -22,6 +30,7 @@ const AllMarketsTable = () => {
             <Table.ColumnHeaderCell>Market Cap</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Volume(24h)</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Original source</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell />
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -44,6 +53,9 @@ const AllMarketsTable = () => {
                 </Link>
               </Flex>
             </Table.Cell>
+            <Table.Cell>
+              <Button>Add to watchlist</Button>
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>2</Table.Cell>
@@ -59,6 +71,9 @@ const AllMarketsTable = () => {
                 See more
               </Link>
             </Table.Cell>
+            <Table.Cell>
+              <Button>Add to watchlist</Button>
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>3</Table.Cell>
@@ -72,6 +87,9 @@ const AllMarketsTable = () => {
                 See more
               </Link>
             </Table.Cell>
+            <Table.Cell>
+              <Text style={{ fontStyle: "italic" }}>Added to watchlist</Text>
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>3</Table.Cell>
@@ -84,6 +102,9 @@ const AllMarketsTable = () => {
               <Link href="https://www.coincap.io/" target="_blank">
                 See more
               </Link>
+            </Table.Cell>
+            <Table.Cell>
+              <Button>Add to watchlist</Button>
             </Table.Cell>
           </Table.Row>
         </Table.Body>
