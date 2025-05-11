@@ -1,87 +1,112 @@
-import { Card, Heading, Text, Table, Link } from "@radix-ui/themes";
+import {
+  Card,
+  Heading,
+  Text,
+  Table,
+  Link,
+  Button,
+  Flex
+} from "@radix-ui/themes";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import DayPriceChangeText from "../PriceChangeText";
+import { CryptoAsset } from "@/commonTypes";
 
-// we can create component for two tables
-const YourWatchlistTable = () => {
+export type YourWatchlistTableProps = {
+  savedCoins: CryptoAsset[];
+  removeCoin: (selectedCoin: string) => void;
+};
+
+const YourWatchlistTable = ({
+  savedCoins,
+  removeCoin
+}: YourWatchlistTableProps) => {
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
         Your Watchlist
       </Heading>
-      <Text as="p" color="gray" mb="0.5rem">
-        Cryptocurrencies you're tracking
-      </Text>
-      <Table.Root>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>#</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Price</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>24h Change</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Market Cap</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Volume(24h)</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Original source</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          <Table.Row>
-            <Table.Cell>1</Table.Cell>
-            <Table.Cell>Ethereum</Table.Cell>
-            <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>
-              <DayPriceChangeText value="2.34" isGrowth={false} />
-            </Table.Cell>
-            <Table.Cell>$1.35T</Table.Cell>
-            <Table.Cell>$28.77B</Table.Cell>
-            <Table.Cell>
-              <Link href="https://www.coincap.io/" target="_blank">
-                See more
-              </Link>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>2</Table.Cell>
-            <Table.Cell>Solana</Table.Cell>
-            <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>
-              <DayPriceChangeText value="2.34" isGrowth={true} />
-            </Table.Cell>
-            <Table.Cell>$1.35T</Table.Cell>
-            <Table.Cell>$28.77B</Table.Cell>
-            <Table.Cell>
-              <Link href="https://www.coincap.io/" target="_blank">
-                See more
-              </Link>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>3</Table.Cell>
-            <Table.Cell>Solana</Table.Cell>
-            <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
-            <Table.Cell>$1.35T</Table.Cell>
-            <Table.Cell>$28.77B</Table.Cell>
-            <Table.Cell>
-              <Link href="https://www.coincap.io/" target="_blank">
-                See more
-              </Link>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>3</Table.Cell>
-            <Table.Cell>Ripple</Table.Cell>
-            <Table.Cell>$68432.51</Table.Cell>
-            <Table.Cell>2.34%</Table.Cell>
-            <Table.Cell>$1.35T</Table.Cell>
-            <Table.Cell>$28.77B</Table.Cell>
-            <Table.Cell>
-              <Link href="https://www.coincap.io/" target="_blank">
-                See more
-              </Link>
-            </Table.Cell>
-          </Table.Row>
-        </Table.Body>
-      </Table.Root>
+      {savedCoins.length > 0 ? (
+        <>
+          <Text as="p" color="gray" mb="0.5rem">
+            Cryptocurrencies you're tracking
+          </Text>
+          <Table.Root>
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeaderCell>#</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Price</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>24h Change</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Market Cap</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Volume(24h)</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Original source</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell />
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {savedCoins.map(
+                ({
+                  rank,
+                  name,
+                  priceUsd,
+                  changePercent24Hr,
+                  marketCapUsd,
+                  volumeUsd24Hr,
+                  explorer
+                }) => (
+                  <Table.Row key={name}>
+                    <Table.Cell>{rank}</Table.Cell>
+                    <Table.Cell>{name}</Table.Cell>
+                    <Table.Cell>
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD"
+                      }).format(Number(priceUsd))}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <DayPriceChangeText value={changePercent24Hr} />
+                    </Table.Cell>
+                    <Table.Cell>
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                        notation: "compact"
+                      }).format(Number(marketCapUsd))}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                        notation: "compact"
+                      }).format(Number(volumeUsd24Hr))}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Flex align="center">
+                        <Link
+                          href={explorer || "https://www.coincap.io/"}
+                          target="_blank"
+                        >
+                          <Flex align="center">
+                            <Text>See more</Text>
+                            <ArrowTopRightIcon />
+                          </Flex>
+                        </Link>
+                      </Flex>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Button color="red" onClick={() => removeCoin(name)}>
+                        Remove
+                      </Button>
+                    </Table.Cell>
+                  </Table.Row>
+                )
+              )}
+            </Table.Body>
+          </Table.Root>
+        </>
+      ) : (
+        <Text color="gray">You do not track any cryptocurrencies.</Text>
+      )}
     </Card>
   );
 };

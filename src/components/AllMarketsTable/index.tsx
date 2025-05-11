@@ -9,9 +9,14 @@ import {
 } from "@radix-ui/themes";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import DayPriceChangeText from "../PriceChangeText";
+import { CryptoAsset } from "@/commonTypes";
 
-// we can create component for two tables
-const AllMarketsTable = ({ coinsList }: any) => {
+type AllMarketsTableProps = {
+  coinsList: CryptoAsset[];
+  saveCoin: (selectedCoin: string) => void;
+};
+
+const AllMarketsTable = ({ coinsList, saveCoin }: AllMarketsTableProps) => {
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
@@ -84,7 +89,9 @@ const AllMarketsTable = ({ coinsList }: any) => {
                   </Flex>
                 </Table.Cell>
                 <Table.Cell>
-                  <Button>Add to watchlist</Button>
+                  <Button onClick={() => saveCoin(name)}>
+                    Add to watchlist
+                  </Button>
                 </Table.Cell>
               </Table.Row>
             )

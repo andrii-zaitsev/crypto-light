@@ -5,6 +5,7 @@ import { Box } from "@radix-ui/themes";
 import TablesSegmentedControl from "@/components/TablesSegmentedControl";
 import AllMarketsTable from "@/components/AllMarketsTable";
 import YourWatchlistTable from "@/components/YourWatchlistTable";
+import { CryptoAsset } from "@/commonTypes";
 
 enum View {
   All = "All",
@@ -13,13 +14,33 @@ enum View {
 
 const MarketTables = () => {
   const [view, setView] = useState<View>(View.All);
+  const [savedCoins, setSavedCoins] = useState<string[]>(
+    JSON.parse(localStorage.getItem("savedCoins") || "[]")
+  );
+
+  const saveCoin = (selectedCoin: string) =>
+    setSavedCoins((prevCoins) => {
+      const newSavedCoins = [...prevCoins, selectedCoin];
+      localStorage.setItem("savedCoins", JSON.stringify(newSavedCoins));
+      return newSavedCoins;
+    });
+
+  const removeCoin = (selectedCoin: string) =>
+    setSavedCoins((prevCoins) => {
+      const newSavedCoins = prevCoins.filter((coin) => coin !== selectedCoin);
+      localStorage.setItem("savedCoins", JSON.stringify(newSavedCoins));
+      return newSavedCoins;
+    });
 
   const { data = [] } = useQuery({
     queryKey: ["assets"],
     queryFn: getAssets
   });
 
-  console.log({ data });
+  const savedAssets = savedCoins.reduce<CryptoAsset[]>((acc, coinName) => {
+    const asset = data.find((asset) => asset.name === coinName);
+    return asset ? [...acc, asset] : acc;
+  }, []);
 
   return (
     <Box mb="2rem">
@@ -31,8 +52,12 @@ const MarketTables = () => {
         ]}
         onValueChange={(newView) => setView(newView as View)}
       />
-      {view === View.All && <AllMarketsTable coinsList={data} />}
-      {view === View.Saved && <YourWatchlistTable />}
+      {view === View.All && (
+        <AllMarketsTable coinsList={data} saveCoin={saveCoin} />
+      )}
+      {view === View.Saved && (
+        <YourWatchlistTable savedCoins={savedAssets} removeCoin={removeCoin} />
+      )}
     </Box>
   );
 };

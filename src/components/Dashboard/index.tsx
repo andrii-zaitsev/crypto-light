@@ -6,7 +6,7 @@ import MarketOverviewCard from "@/components/MarketOverviewCard";
 
 const Dashboard = () => {
   return (
-    <Container size="3">
+    <Container>
       <Flex align="center" gap="2" mt="2rem" mb="2rem">
         <BarChartIcon width={40} height={40} color="#22c55e" />
         <Heading as="h1">CryptoLight</Heading>
