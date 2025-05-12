@@ -12,7 +12,7 @@ const Dashboard = () => {
         <Heading as="h1">CryptoLight</Heading>
       </Flex>
       <Flex mb="2rem">
-        <Box maxWidth="27rem">
+        <Box maxWidth="27rem" mr="1.5rem">
           <MarketSentimentCard />
         </Box>
         <MarketOverviewCard />
