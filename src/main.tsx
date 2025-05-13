@@ -18,7 +18,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <Theme>
+        <Theme panelBackground="solid">
           <App />
         </Theme>
       </RecoilRoot>

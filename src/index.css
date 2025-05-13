@@ -1,4 +1,7 @@
 body {
   margin: 0;
-  background-color: #f3f4f6;
+}
+
+.radix-themes {
+  --color-background: #f3f4f6;
 }
