@@ -1,4 +1,5 @@
 import { Card, Heading, Text, Flex } from "@radix-ui/themes";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 const MarketOverviewCard = () => {
   return (
@@ -18,12 +19,22 @@ const MarketOverviewCard = () => {
         </Card>
         <Card style={{ width: "32%" }}>Average VWAP Change</Card>
       </Flex>
-      <Card mt="1.5rem">
-        Disclaimer: The information provided by this application is for general
-        informational purposes only. It does not constitute financial,
-        investment, or trading advice. Always do your own research and consult
-        with a licensed financial advisor before making any investment
-        decisions.
+      <Card mt="1.5rem" style={{ backgroundColor: "#eaebec" }}>
+        <Flex align="start">
+          <InfoCircledIcon
+            width={70}
+            height={70}
+            color="gray"
+            style={{ maxHeight: "2rem" }}
+          />
+          <Text ml="0.5rem" color="gray">
+            <b>Disclaimer</b>: The information provided by this application is
+            for general informational purposes only. It does not constitute
+            financial, investment, or trading advice. Always do your own
+            research and consult with a licensed financial advisor before making
+            any investment decisions.
+          </Text>
+        </Flex>
       </Card>
     </Card>
   );
