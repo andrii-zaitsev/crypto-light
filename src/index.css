@@ -5,3 +5,11 @@ body {
 .radix-themes {
   --color-background: #f3f4f6;
 }
+
+.stats-card {
+  width: 32%;
+}
+
+.stats-card::before {
+  background-color: #f3f4f6;
+}

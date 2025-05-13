@@ -1,5 +1,6 @@
-import { Card, Heading, Text, Flex } from "@radix-ui/themes";
+import { Card, Heading, Text, Flex, Box } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { TrendingUpDown } from "lucide-react";
 
 const MarketOverviewCard = () => {
   return (
@@ -11,13 +12,23 @@ const MarketOverviewCard = () => {
         Top 100 cryptocurrencies statistics
       </Text>
       <Flex width="100%">
-        <Card style={{ width: "32%", marginRight: "1rem" }}>
-          Average Price Change
+        <Card className="stats-card" mr="1rem">
+          <Flex align="start">
+            <Text color="gray">Average Price Change</Text>
+            <Box
+              width="2rem"
+              height="2rem"
+              p="5px"
+              style={{ borderRadius: "100px", backgroundColor: "#dcfce7" }}
+            >
+              <TrendingUpDown size="1.25rem" color="#16a34a" />
+            </Box>
+          </Flex>
         </Card>
-        <Card style={{ width: "32%", marginRight: "1rem" }}>
+        <Card className="stats-card" mr="1rem">
           Total Market cap
         </Card>
-        <Card style={{ width: "32%" }}>Average VWAP Change</Card>
+        <Card className="stats-card">Average VWAP Change</Card>
       </Flex>
       <Card mt="1.5rem" style={{ backgroundColor: "#eaebec" }}>
         <Flex align="start">
