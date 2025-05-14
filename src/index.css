@@ -8,6 +8,7 @@ body {
 
 .stats-card {
   width: 32%;
+  padding-bottom: 1rem;
 }
 
 .stats-card::before {

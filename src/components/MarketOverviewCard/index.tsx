@@ -1,6 +1,6 @@
 import { Card, Heading, Text, Flex, Box } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { TrendingUpDown } from "lucide-react";
+import { TrendingUpDown, ChartColumn, ChartLine } from "lucide-react";
 
 const MarketOverviewCard = () => {
   return (
@@ -13,8 +13,10 @@ const MarketOverviewCard = () => {
       </Text>
       <Flex width="100%">
         <Card className="stats-card" mr="1rem">
-          <Flex align="start">
-            <Text color="gray">Average Price Change</Text>
+          <Flex align="start" justify="between" width="100%" mb="0.5rem">
+            <Box width="7rem">
+              <Text color="gray">Average Price Change</Text>
+            </Box>
             <Box
               width="2rem"
               height="2rem"
@@ -24,11 +26,46 @@ const MarketOverviewCard = () => {
               <TrendingUpDown size="1.25rem" color="#16a34a" />
             </Box>
           </Flex>
+          <Text weight="bold" size="6">
+            -2.4%
+          </Text>
         </Card>
         <Card className="stats-card" mr="1rem">
-          Total Market cap
+          <Flex align="start" justify="between" width="100%" mb="0.5rem">
+            <Box width="7rem">
+              <Text color="gray">Total Market Cap</Text>
+            </Box>
+            <Box
+              width="2rem"
+              height="2rem"
+              p="6px"
+              style={{ borderRadius: "100px", backgroundColor: "#dbeafe" }}
+            >
+              <ChartColumn size="1.25rem" color="#2563eb" />
+            </Box>
+          </Flex>
+          <Text weight="bold" size="6">
+            $1.87T
+          </Text>
         </Card>
-        <Card className="stats-card">Average VWAP Change</Card>
+        <Card className="stats-card">
+          <Flex align="start" justify="between" width="100%" mb="0.5rem">
+            <Box width="7rem">
+              <Text color="gray">Average VWAP Change</Text>
+            </Box>
+            <Box
+              width="2rem"
+              height="2rem"
+              p="6px"
+              style={{ borderRadius: "100px", backgroundColor: "#f3e8ff" }}
+            >
+              <ChartLine size="1.25rem" color="#9333ea" />
+            </Box>
+          </Flex>
+          <Text weight="bold" size="6">
+            +30.2%
+          </Text>
+        </Card>
       </Flex>
       <Card mt="1.5rem" style={{ backgroundColor: "#eaebec" }}>
         <Flex align="start">
