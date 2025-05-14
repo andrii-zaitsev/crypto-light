@@ -67,7 +67,7 @@ const MarketOverviewCard = () => {
           </Text>
         </Card>
       </Flex>
-      <Card mt="1.5rem" style={{ backgroundColor: "#eaebec" }}>
+      <Card mt="4.1rem" style={{ backgroundColor: "#eaebec" }}>
         <Flex align="start">
           <InfoCircledIcon
             width={70}
