@@ -1,4 +1,4 @@
-import { SegmentedControl } from "@radix-ui/themes";
+import { Box, SegmentedControl } from "@radix-ui/themes";
 
 export type TablesSegmentedControlProps = {
   options: { value: string; label: string }[];
@@ -13,9 +13,12 @@ const TablesSegmentedControl = ({
 }: TablesSegmentedControlProps) => {
   return (
     <SegmentedControl.Root
+      className="view-switcher"
       value={value}
       onValueChange={onValueChange}
       mb="2rem"
+      radius="large"
+      variant="classic"
     >
       {options.map(({ label, value }) => (
         <SegmentedControl.Item key={value} value={value}>

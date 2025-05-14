@@ -14,3 +14,7 @@ body {
 .stats-card::before {
   background-color: #f3f4f6;
 }
+
+.view-switcher {
+  background-color: #e5e7eb;
+}
