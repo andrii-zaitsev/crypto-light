@@ -10,7 +10,11 @@ enum View {
   Saved = "Saved"
 }
 
-const MarketTables = () => {
+type MarketTablesProps = {
+  assets: any[];
+};
+
+const MarketTables = ({ assets }: MarketTablesProps) => {
   const [view, setView] = useState<View>(View.All);
   const [savedCoins, setSavedCoins] = useState<string[]>(
     JSON.parse(localStorage.getItem("savedCoins") || "[]")
@@ -31,7 +35,7 @@ const MarketTables = () => {
     });
 
   const savedAssets = savedCoins.reduce<CryptoAsset[]>((acc, coinName) => {
-    const asset = data.find((asset) => asset.name === coinName);
+    const asset = assets.find((asset) => asset.name === coinName);
     return asset ? [...acc, asset] : acc;
   }, []);
 
@@ -47,7 +51,7 @@ const MarketTables = () => {
       />
       {view === View.All && (
         <AllMarketsTable
-          coinsList={data}
+          coinsList={assets}
           savedCoins={savedCoins}
           saveCoin={saveCoin}
         />

@@ -48,7 +48,7 @@ const Dashboard = () => {
         </Box>
         <MarketOverviewCard />
       </Flex>
-      <MarketTables />
+      <MarketTables assets={data} />
     </Container>
   );
 };
