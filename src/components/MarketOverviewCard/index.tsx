@@ -2,7 +2,26 @@ import { Card, Heading, Text, Flex, Box } from "@radix-ui/themes";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { TrendingUpDown, ChartColumn, ChartLine } from "lucide-react";
 
-const MarketOverviewCard = () => {
+export type MarketOverviewCardProps = {
+  assets: any[];
+};
+
+const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
+  const { totalPriceChange, totalCap, totalVwap } = assets.reduce(
+    (acc, current) => {
+      return {
+        totalPriceChange:
+          acc.totalPriceChange + Number(current.changePercent24Hr),
+        totalCap: acc.totalCap + Number(current.marketCapUsd),
+        totalVwap: acc.totalVwap + Number(current.vwap24Hr)
+      };
+    },
+    { totalPriceChange: 0, totalCap: 0, totalVwap: 0 }
+  );
+
+  const averagePriceChange = totalPriceChange / assets.length;
+  const averageVwap = totalVwap / assets.length;
+
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
@@ -27,7 +46,7 @@ const MarketOverviewCard = () => {
             </Box>
           </Flex>
           <Text weight="bold" size="6">
-            -2.4%
+            {averagePriceChange.toFixed(2)}%
           </Text>
         </Card>
         <Card className="stats-card" mr="1rem">
@@ -45,7 +64,11 @@ const MarketOverviewCard = () => {
             </Box>
           </Flex>
           <Text weight="bold" size="6">
-            $1.87T
+            {new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+              notation: "compact"
+            }).format(Number(totalCap))}
           </Text>
         </Card>
         <Card className="stats-card">

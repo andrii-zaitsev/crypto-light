@@ -46,7 +46,7 @@ const Dashboard = () => {
         <Box maxWidth="27rem" mr="1.5rem">
           <MarketSentimentCard assets={data} />
         </Box>
-        <MarketOverviewCard />
+        <MarketOverviewCard assets={data} />
       </Flex>
       <MarketTables assets={data} />
     </Container>
