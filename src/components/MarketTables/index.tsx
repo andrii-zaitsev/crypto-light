@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getAssets } from "@/api";
 import { Box } from "@radix-ui/themes";
 import TablesSegmentedControl from "@/components/TablesSegmentedControl";
 import AllMarketsTable from "@/components/AllMarketsTable";
@@ -31,11 +29,6 @@ const MarketTables = () => {
       localStorage.setItem("savedCoins", JSON.stringify(newSavedCoins));
       return newSavedCoins;
     });
-
-  const { data = [] } = useQuery({
-    queryKey: ["assets"],
-    queryFn: getAssets
-  });
 
   const savedAssets = savedCoins.reduce<CryptoAsset[]>((acc, coinName) => {
     const asset = data.find((asset) => asset.name === coinName);
