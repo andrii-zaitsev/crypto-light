@@ -1,26 +1,42 @@
-import { useState } from "react";
 import { Card, Heading, Text, Flex } from "@radix-ui/themes";
 import TrafficLight from "./TrafficLight";
 import SentimentText from "./SentimentText";
 import { Sentiment } from "@/commonTypes";
 
-const MarketSentimentCard = () => {
-  const [sentiment, setSentiment] = useState<Sentiment>(Sentiment.Good);
+type MarketSentimentCardProps = {
+  assets: any[];
+};
 
-  const handleSetimentChange = () =>
-    setSentiment((prevSentiment) => {
-      if (prevSentiment === Sentiment.Good) {
-        return Sentiment.Bad;
-      } else if (prevSentiment === Sentiment.Bad) {
-        return Sentiment.Neutral;
-      } else {
-        return Sentiment.Good;
-      }
-    });
+const MarketSentimentCard = ({ assets }: MarketSentimentCardProps) => {
+  const computeSentiment = () => {
+    const [btc] = assets;
+    const btcChange24h = Number(btc.changePercent24Hr);
+
+    const allRestAssets = assets.length - 1;
+    const averageMarketCap24hChange =
+      assets
+        .slice(1)
+        .reduce((acc, current) => acc + Number(current.changePercent24Hr), 0) /
+      allRestAssets;
+
+    console.log({ btcChange24h, averageMarketCap24hChange });
+
+    if (averageMarketCap24hChange >= 1 && btcChange24h >= 1.5) {
+      return Sentiment.Good;
+    } else if (
+      Math.abs(averageMarketCap24hChange) < 1 &&
+      Math.abs(btcChange24h) < 1.5
+    ) {
+      return Sentiment.Neutral;
+    } else {
+      return Sentiment.Bad;
+    }
+  };
+
+  const sentiment = computeSentiment();
 
   return (
     <Card size="3">
-      <button onClick={handleSetimentChange}>change</button>
       <Heading as="h3" mb="0.5rem">
         Market Sentiment
       </Heading>

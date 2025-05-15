@@ -44,7 +44,7 @@ const Dashboard = () => {
       </Flex>
       <Flex mb="2rem">
         <Box maxWidth="27rem" mr="1.5rem">
-          <MarketSentimentCard />
+          <MarketSentimentCard assets={data} />
         </Box>
         <MarketOverviewCard />
       </Flex>
