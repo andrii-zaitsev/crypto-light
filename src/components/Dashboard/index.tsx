@@ -37,13 +37,42 @@ const Dashboard = () => {
   }
 
   return (
-    <Container>
-      <Flex align="center" gap="2" mt="2rem" mb="2rem">
+    <Container pl="1rem" pr="1rem">
+      <Flex
+        align="center"
+        gap="2"
+        mt="2rem"
+        mb="2rem"
+        justify={{
+          initial: "center",
+          sm: "start"
+        }}
+      >
         <BarChartIcon width={40} height={40} color="#22c55e" />
         <Heading as="h1">CryptoLight</Heading>
       </Flex>
-      <Flex mb="2rem">
-        <Box maxWidth="27rem" mr="1.5rem">
+      <Flex
+        mb="2rem"
+        align="center"
+        direction={{
+          initial: "column",
+          md: "row"
+        }}
+      >
+        <Box
+          mr={{
+            initial: "initial",
+            md: "1.5rem"
+          }}
+          mb={{
+            initial: "1.5rem",
+            md: "initial"
+          }}
+          maxWidth={{
+            initial: "initial",
+            md: "27rem"
+          }}
+        >
           <MarketSentimentCard assets={data} />
         </Box>
         <MarketOverviewCard assets={data} />
