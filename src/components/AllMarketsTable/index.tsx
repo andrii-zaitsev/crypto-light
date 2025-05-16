@@ -99,7 +99,7 @@ const AllMarketsTable = ({
                       Added to watchlist
                     </Text>
                   ) : (
-                    <Button onClick={() => saveCoin(name)}>
+                    <Button variant="ghost" onClick={() => saveCoin(name)}>
                       Add to watchlist
                     </Button>
                   )}
