@@ -32,8 +32,18 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
       <Text as="p" color="gray" mb="1.5rem">
         Top 100 cryptocurrencies statistics
       </Text>
-      <Flex width="100%">
-        <Card className="stats-card" mr="1rem">
+      <Flex
+        width="100%"
+        direction={{
+          initial: "column",
+          sm: "row"
+        }}
+      >
+        <Card
+          className="stats-card"
+          mr={{ initial: "initial", sm: "1rem" }}
+          mb={{ initial: "1rem", sm: "initial" }}
+        >
           <Flex align="start" justify="between" width="100%" mb="0.5rem">
             <Box width="7rem">
               <Text color="gray">Average Price Change</Text>
@@ -51,7 +61,11 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
             {averagePriceChange.toFixed(2)}%
           </Text>
         </Card>
-        <Card className="stats-card" mr="1rem">
+        <Card
+          className="stats-card"
+          mr={{ initial: "initial", sm: "1rem" }}
+          mb={{ initial: "1rem", sm: "initial" }}
+        >
           <Flex align="start" justify="between" width="100%" mb="0.5rem">
             <Box width="7rem">
               <Text color="gray">Total Market Cap</Text>
@@ -92,7 +106,10 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
           </Text>
         </Card>
       </Flex>
-      <Card mt="4.1rem" style={{ backgroundColor: "#eaebec" }}>
+      <Card
+        mt={{ initial: "1rem", md: "4.1rem" }}
+        style={{ backgroundColor: "#eaebec" }}
+      >
         <Flex align="start">
           <InfoCircledIcon
             width={70}
