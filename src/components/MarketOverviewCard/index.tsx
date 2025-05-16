@@ -7,20 +7,22 @@ export type MarketOverviewCardProps = {
 };
 
 const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
-  const { totalPriceChange, totalCap, totalVwap } = assets.reduce(
+  const { totalPriceChange, totalCap, totalCoinsVWAPHigh } = assets.reduce(
     (acc, current) => {
+      const vwapHigh =
+        Number(current.priceUsd) > Number(current.vwap24Hr) ? 1 : 0;
+
       return {
         totalPriceChange:
           acc.totalPriceChange + Number(current.changePercent24Hr),
         totalCap: acc.totalCap + Number(current.marketCapUsd),
-        totalVwap: acc.totalVwap + Number(current.vwap24Hr)
+        totalCoinsVWAPHigh: acc.totalCoinsVWAPHigh + vwapHigh
       };
     },
-    { totalPriceChange: 0, totalCap: 0, totalVwap: 0 }
+    { totalPriceChange: 0, totalCap: 0, totalCoinsVWAPHigh: 0 }
   );
 
   const averagePriceChange = totalPriceChange / assets.length;
-  const averageVwap = totalVwap / assets.length;
 
   return (
     <Card size="3">
@@ -74,7 +76,7 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
         <Card className="stats-card">
           <Flex align="start" justify="between" width="100%" mb="0.5rem">
             <Box width="7rem">
-              <Text color="gray">Average VWAP Change</Text>
+              <Text color="gray">Price higher than VWAP</Text>
             </Box>
             <Box
               width="2rem"
@@ -86,7 +88,7 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
             </Box>
           </Flex>
           <Text weight="bold" size="6">
-            +30.2%
+            {totalCoinsVWAPHigh}/100
           </Text>
         </Card>
       </Flex>

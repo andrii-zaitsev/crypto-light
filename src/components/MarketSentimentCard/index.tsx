@@ -19,8 +19,6 @@ const MarketSentimentCard = ({ assets }: MarketSentimentCardProps) => {
         .reduce((acc, current) => acc + Number(current.changePercent24Hr), 0) /
       allRestAssets;
 
-    console.log({ btcChange24h, averageMarketCap24hChange });
-
     if (averageMarketCap24hChange >= 1 && btcChange24h >= 1.5) {
       return Sentiment.Good;
     } else if (
