@@ -41,7 +41,14 @@ const MarketSentimentCard = ({ assets }: MarketSentimentCardProps) => {
       <Text as="p" color="gray" mb="1.5rem">
         Current market conditions
       </Text>
-      <Flex align="center" gap="1.5rem">
+      <Flex
+        align="center"
+        direction={{
+          initial: "column",
+          sm: "row"
+        }}
+        gap="1.5rem"
+      >
         <TrafficLight sentiment={sentiment} />
         {sentiment === Sentiment.Good && (
           <SentimentText
