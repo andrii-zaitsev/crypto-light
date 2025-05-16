@@ -94,7 +94,11 @@ const YourWatchlistTable = ({
                       </Flex>
                     </Table.Cell>
                     <Table.Cell>
-                      <Button color="red" onClick={() => removeCoin(name)}>
+                      <Button
+                        color="red"
+                        variant="ghost"
+                        onClick={() => removeCoin(name)}
+                      >
                         Remove
                       </Button>
                     </Table.Cell>
