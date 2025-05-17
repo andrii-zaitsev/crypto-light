@@ -1,4 +1,4 @@
-import { Box, SegmentedControl } from "@radix-ui/themes";
+import { SegmentedControl } from "@radix-ui/themes";
 
 export type TablesSegmentedControlProps = {
   options: { value: string; label: string }[];
