@@ -1,69 +1,85 @@
-// import { useState, useEffect } from "react";
-// import { useRecoilState } from "recoil";
-// import { Stack, Box } from "@mui/material";
-// import Header from "@/components/Header";
-// import Search from "@/components/Search";
-// import SelectedTicker from "@/components/SelectedTicker";
-// import MobileSelectedTicker from "@/components/MobileSelectedTicker.tsx";
-// import Tickers from "@/components/Tickers";
-// import { displayMobileSelectedTickerState } from "@/state";
-
-// const App = () => {
-//   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-//   const [displayMobileTicker, setDisplayMobileTicker] = useRecoilState(
-//     displayMobileSelectedTickerState
-//   );
-
-//   useEffect(() => {
-//     if (!window.onresize) {
-//       window.onresize = () => setScreenWidth(window.innerWidth);
-//     }
-//   }, []);
-
-//   useEffect(() => {
-//     if (screenWidth >= 900 && displayMobileTicker) {
-//       setDisplayMobileTicker(false);
-//     }
-//   }, [screenWidth, displayMobileTicker, setDisplayMobileTicker]);
-
-//   return (
-//     <Box width="100%" height="100%">
-//       {!displayMobileTicker && <Header />}
-//       <main style={{ display: displayMobileTicker ? "none" : "block" }}>
-//         <Stack direction="row">
-//           <Box
-//             sx={(theme) => ({
-//               width: "100%",
-//               [theme.breakpoints.up("md")]: { width: "350px" }
-//             })}
-//           >
-//             <Search />
-//             <Tickers />
-//           </Box>
-//           {screenWidth >= 900 && (
-//             <Box component="section" width="100%">
-//               <SelectedTicker />
-//             </Box>
-//           )}
-//         </Stack>
-//       </main>
-//       {screenWidth < 900 && displayMobileTicker && <MobileSelectedTicker />}
-//     </Box>
-//   );
-// };
-
-// export default App;
-import Dashboard from "@/components/Dashboard";
+import { BarChartIcon } from "@radix-ui/react-icons";
+import {
+  Container,
+  Flex,
+  Heading,
+  Box,
+  Progress,
+  Text
+} from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
-import { getAssets } from "./api";
+import { getAssets } from "@/api";
+import MarketTables from "@/components/MarketTables";
+import MarketSentimentCard from "@/components/MarketSentimentCard";
+import MarketOverviewCard from "@/components/MarketOverviewCard";
 
-const App = () => {
-  // const { data = [] } = useQuery({
-  //   queryKey: ["assets"],
-  //   queryFn: getAssets
-  // });
+const Dashboard = () => {
+  const { data = [], status } = useQuery({
+    queryKey: ["assets"],
+    queryFn: getAssets
+  });
 
-  return <Dashboard />;
+  if (status === "pending") {
+    return (
+      <Container height="100vh">
+        <Flex width="100%" height="100%" align="center" justify="center">
+          <Flex direction="column" align="center">
+            <Text size="8" mb="1rem">
+              🚦⏳
+            </Text>
+            <Box width="20rem" maxWidth="20rem">
+              <Progress color="grass" />
+            </Box>
+          </Flex>
+        </Flex>
+      </Container>
+    );
+  }
+
+  return (
+    <Container pl="1rem" pr="1rem">
+      <Flex
+        align="center"
+        gap="2"
+        mt="2rem"
+        mb="2rem"
+        justify={{
+          initial: "center",
+          sm: "start"
+        }}
+      >
+        <BarChartIcon width={40} height={40} color="#22c55e" />
+        <Heading as="h1">CryptoLight</Heading>
+      </Flex>
+      <Flex
+        mb="2rem"
+        align="center"
+        direction={{
+          initial: "column",
+          md: "row"
+        }}
+      >
+        <Box
+          mr={{
+            initial: "initial",
+            md: "1.5rem"
+          }}
+          mb={{
+            initial: "1.5rem",
+            md: "initial"
+          }}
+          maxWidth={{
+            initial: "initial",
+            md: "27rem"
+          }}
+        >
+          <MarketSentimentCard assets={data} />
+        </Box>
+        <MarketOverviewCard assets={data} />
+      </Flex>
+      <MarketTables assets={data} />
+    </Container>
+  );
 };
 
-export default App;
+export default Dashboard;

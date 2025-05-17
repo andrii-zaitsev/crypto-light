@@ -33,7 +33,7 @@ const YourWatchlistTable = ({
           <Table.Root>
             <Table.Header>
               <Table.Row>
-                <Table.ColumnHeaderCell>#</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>Rank</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell>Price</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell>24h Change</Table.ColumnHeaderCell>

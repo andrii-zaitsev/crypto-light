@@ -28,7 +28,7 @@ const AllMarketsTable = ({
         Top Cryptocurrencies
       </Heading>
       <Text as="p" color="gray" mb="0.5rem">
-        Market data for top cryptocurrencies
+        Market data for Top 100 cryptocurrencies
       </Text>
       <Table.Root>
         <Table.Header>

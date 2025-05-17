@@ -1,1 +1,0 @@
-export const SAVED_TICKERS_KEY = "SAVED_TICKERS";

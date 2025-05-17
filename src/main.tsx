@@ -1,6 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App.tsx";
 import { Theme } from "@radix-ui/themes";
@@ -17,11 +16,9 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <Theme panelBackground="solid">
-          <App />
-        </Theme>
-      </RecoilRoot>
+      <Theme panelBackground="solid">
+        <App />
+      </Theme>
     </QueryClientProvider>
   </StrictMode>
 );
