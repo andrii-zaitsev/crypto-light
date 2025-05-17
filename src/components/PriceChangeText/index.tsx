@@ -1,5 +1,5 @@
 import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
-import { Card, Heading, Text, Table, Link, Flex } from "@radix-ui/themes";
+import { Text, Flex } from "@radix-ui/themes";
 
 export type PriceChangeTextProps = {
   value: string;
