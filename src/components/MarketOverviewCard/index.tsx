@@ -27,7 +27,7 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
-        Market Overview 24h
+        Market Overview
       </Heading>
       <Text as="p" color="gray" mb="1.5rem">
         Top 100 cryptocurrencies statistics

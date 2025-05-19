@@ -94,11 +94,9 @@ const AllMarketsTable = ({
                       </Link>
                     </Flex>
                   </Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell align="center">
                     {savedCoins.includes(name) ? (
-                      <Text style={{ fontStyle: "italic" }}>
-                        Added to watchlist
-                      </Text>
+                      <Text style={{ fontStyle: "italic" }}>Added</Text>
                     ) : (
                       <Button variant="ghost" onClick={() => saveCoin(name)}>
                         Add to watchlist
