@@ -9,6 +9,7 @@ import {
 } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import { getAssets } from "@/api";
+import NetworkStatusCard from "@/components/NetworkStatusCard";
 import MarketTables from "@/components/MarketTables";
 import MarketSentimentCard from "@/components/MarketSentimentCard";
 import MarketOverviewCard from "@/components/MarketOverviewCard";
@@ -42,7 +43,7 @@ const Dashboard = () => {
         align="center"
         gap="2"
         mt="2rem"
-        mb="2rem"
+        mb="1rem"
         justify={{
           initial: "center",
           sm: "start"
@@ -51,6 +52,7 @@ const Dashboard = () => {
         <BarChartIcon width={40} height={40} color="#22c55e" />
         <Heading as="h1">CryptoLight</Heading>
       </Flex>
+      <NetworkStatusCard />
       <Flex
         mb="2rem"
         align="center"
