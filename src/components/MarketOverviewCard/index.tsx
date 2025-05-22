@@ -23,6 +23,8 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
   );
 
   const averagePriceChange = totalPriceChange / assets.length;
+  const plusSign =
+    Math.abs(averagePriceChange) === averagePriceChange ? "+" : "";
 
   return (
     <Card size="3">
@@ -58,7 +60,7 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
             </Box>
           </Flex>
           <Text weight="bold" size="6">
-            {averagePriceChange.toFixed(2)}%
+            {`${plusSign}${averagePriceChange.toFixed(2)}%`}
           </Text>
         </Card>
         <Card
