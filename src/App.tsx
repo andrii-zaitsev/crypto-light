@@ -1,4 +1,4 @@
-import { BarChartIcon } from "@radix-ui/react-icons";
+import { ChartNoAxesCombined } from "lucide-react";
 import {
   Container,
   Flex,
@@ -49,7 +49,7 @@ const Dashboard = () => {
           sm: "start"
         }}
       >
-        <BarChartIcon width={40} height={40} color="#22c55e" />
+        <ChartNoAxesCombined size="2.5rem" color="#22c55e" />
         <Heading as="h1">CryptoLight</Heading>
       </Flex>
       <NetworkStatusCard />

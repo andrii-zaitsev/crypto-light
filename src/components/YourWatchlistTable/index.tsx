@@ -7,7 +7,7 @@ import {
   Button,
   Flex
 } from "@radix-ui/themes";
-import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { ArrowUpRight } from "lucide-react";
 import DayPriceChangeText from "../PriceChangeText";
 import { CryptoAsset } from "@/commonTypes";
 
@@ -88,7 +88,7 @@ const YourWatchlistTable = ({
                         >
                           <Flex align="center">
                             <Text>See more</Text>
-                            <ArrowTopRightIcon />
+                            <ArrowUpRight size="1rem" strokeWidth={1.1} />
                           </Flex>
                         </Link>
                       </Flex>

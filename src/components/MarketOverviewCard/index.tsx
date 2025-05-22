@@ -1,6 +1,5 @@
 import { Card, Heading, Text, Flex, Box } from "@radix-ui/themes";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { TrendingUpDown, ChartColumn, ChartLine } from "lucide-react";
+import { TrendingUpDown, ChartColumn, ChartLine, Info } from "lucide-react";
 
 export type MarketOverviewCardProps = {
   assets: any[];
@@ -113,12 +112,9 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
         style={{ backgroundColor: "#eaebec" }}
       >
         <Flex align="start">
-          <InfoCircledIcon
-            width={70}
-            height={70}
-            color="gray"
-            style={{ maxHeight: "2rem" }}
-          />
+          <Box width="1.5rem" pt="0.2rem">
+            <Info width="1.5rem" height="1.5rem" color="gray" />
+          </Box>
           <Text ml="0.5rem" color="gray">
             <b>Disclaimer</b>: The information provided by this application is
             for general informational purposes only. It does not constitute
