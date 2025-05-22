@@ -58,7 +58,9 @@ const NetworkStatusCard = () => {
           Offline
         </Text>
       </Flex>
-      <Text color="gray">Last updated: {formattedLastUpdated}</Text>
+      <Text color="gray" ml="2">
+        Last updated: {formattedLastUpdated}
+      </Text>
     </Flex>
   );
 };
