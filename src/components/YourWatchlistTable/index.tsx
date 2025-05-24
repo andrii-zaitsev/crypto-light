@@ -28,7 +28,8 @@ const YourWatchlistTable = ({
       {savedCoins.length > 0 ? (
         <>
           <Text as="p" color="gray" mb="0.5rem">
-            Cryptocurrencies you're tracking
+            Cryptocurrencies you're tracking. All data saved locally in your
+            browser.
           </Text>
           <Table.Root>
             <Table.Header>
