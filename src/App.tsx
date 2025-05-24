@@ -1,40 +1,21 @@
 import { ChartNoAxesCombined } from "lucide-react";
-import {
-  Container,
-  Flex,
-  Heading,
-  Box,
-  Progress,
-  Text
-} from "@radix-ui/themes";
+import { Container, Flex, Heading, Box } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import { getAssets } from "@/api";
+import Loading from "@/components/Loading";
 import NetworkStatusCard from "@/components/NetworkStatusCard";
 import MarketTables from "@/components/MarketTables";
 import MarketSentimentCard from "@/components/MarketSentimentCard";
 import MarketOverviewCard from "@/components/MarketOverviewCard";
 
 const App = () => {
-  const { data = [], status } = useQuery({
+  const { data: assets = [], status } = useQuery({
     queryKey: ["assets"],
     queryFn: getAssets
   });
 
   if (status === "pending") {
-    return (
-      <Container height="100vh">
-        <Flex width="100%" height="100%" align="center" justify="center">
-          <Flex direction="column" align="center">
-            <Text size="8" mb="1rem">
-              🚦⏳
-            </Text>
-            <Box width="20rem" maxWidth="20rem">
-              <Progress color="grass" />
-            </Box>
-          </Flex>
-        </Flex>
-      </Container>
-    );
+    return <Loading />;
   }
 
   return (
@@ -75,11 +56,11 @@ const App = () => {
             md: "27rem"
           }}
         >
-          <MarketSentimentCard assets={data} />
+          <MarketSentimentCard assets={assets} />
         </Box>
-        <MarketOverviewCard assets={data} />
+        <MarketOverviewCard assets={assets} />
       </Flex>
-      <MarketTables assets={data} />
+      <MarketTables assets={assets} />
     </Container>
   );
 };

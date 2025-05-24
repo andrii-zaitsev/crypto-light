@@ -1,9 +1,10 @@
 import { Card, Heading, Text, Flex, Box } from "@radix-ui/themes";
 import { TrendingUpDown, ChartColumn, ChartLine, Info } from "lucide-react";
-import MarketStatsCard from "../MarketStatsCard";
+import MarketStatsCard from "./MarketStatsCard";
+import { CryptoAsset } from "@/commonTypes";
 
 export type MarketOverviewCardProps = {
-  assets: any[];
+  assets: CryptoAsset[];
 };
 
 const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {

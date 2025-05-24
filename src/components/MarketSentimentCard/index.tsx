@@ -1,10 +1,10 @@
 import { Card, Heading, Text, Flex } from "@radix-ui/themes";
 import TrafficLight from "./TrafficLight";
 import SentimentText from "./SentimentText";
-import { Sentiment } from "@/commonTypes";
+import { CryptoAsset, Sentiment } from "@/commonTypes";
 
 type MarketSentimentCardProps = {
-  assets: any[];
+  assets: CryptoAsset[];
 };
 
 const MarketSentimentCard = ({ assets }: MarketSentimentCardProps) => {
@@ -12,12 +12,12 @@ const MarketSentimentCard = ({ assets }: MarketSentimentCardProps) => {
     const [btc] = assets;
     const btcChange24h = Number(btc.changePercent24Hr);
 
-    const allRestAssets = assets.length - 1;
+    const allRestAssets = assets.slice(1);
     const averageMarketCap24hChange =
-      assets
-        .slice(1)
-        .reduce((acc, current) => acc + Number(current.changePercent24Hr), 0) /
-      allRestAssets;
+      allRestAssets.reduce(
+        (acc, current) => acc + Number(current.changePercent24Hr),
+        0
+      ) / allRestAssets.length;
 
     if (averageMarketCap24hChange >= 1 && btcChange24h >= 1.5) {
       return Sentiment.Good;

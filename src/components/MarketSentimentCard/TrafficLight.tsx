@@ -2,44 +2,44 @@ import { motion } from "framer-motion";
 import { Flex } from "@radix-ui/themes";
 import { Sentiment } from "@/commonTypes";
 
+const lights = [
+  {
+    sentiment: Sentiment.Bad,
+    activeColor: "#ef4444",
+    inactiveColor: "rgb(127, 29, 29, 0.3)",
+    boxShadowAnimation: [
+      "0 0 0 0 rgba(239, 68, 68, 0)",
+      "0 0 0 20px rgba(239, 68, 68, 0.3)",
+      "0 0 0 0 rgba(239, 68, 68, 0)"
+    ]
+  },
+  {
+    sentiment: Sentiment.Neutral,
+    activeColor: "#eab308",
+    inactiveColor: "rgb(113, 63, 18, 0.3)",
+    boxShadowAnimation: [
+      "0 0 0 0 rgba(234, 179, 8, 0)",
+      "0 0 0 20px rgba(234, 179, 8, 0.3)",
+      "0 0 0 0 rgba(234, 179, 8, 0)"
+    ]
+  },
+  {
+    sentiment: Sentiment.Good,
+    activeColor: "#22c55e",
+    inactiveColor: "rgb(20, 83, 45, 0.3)",
+    boxShadowAnimation: [
+      "0 0 0 0 rgba(34, 197, 94, 0)",
+      "0 0 0 20px rgba(34, 197, 94, 0.3)",
+      "0 0 0 0 rgba(34, 197, 94, 0)"
+    ]
+  }
+];
+
 export type TrafficLightProps = {
   sentiment: Sentiment;
 };
 
 const TrafficLight = ({ sentiment }: TrafficLightProps) => {
-  const lights = [
-    {
-      sentiment: Sentiment.Bad,
-      activeColor: "#ef4444",
-      inactiveColor: "rgb(127, 29, 29, 0.3)",
-      boxShadowAnimation: [
-        "0 0 0 0 rgba(239, 68, 68, 0)",
-        "0 0 0 20px rgba(239, 68, 68, 0.3)",
-        "0 0 0 0 rgba(239, 68, 68, 0)"
-      ]
-    },
-    {
-      sentiment: Sentiment.Neutral,
-      activeColor: "#eab308",
-      inactiveColor: "rgb(113, 63, 18, 0.3)",
-      boxShadowAnimation: [
-        "0 0 0 0 rgba(234, 179, 8, 0)",
-        "0 0 0 20px rgba(234, 179, 8, 0.3)",
-        "0 0 0 0 rgba(234, 179, 8, 0)"
-      ]
-    },
-    {
-      sentiment: Sentiment.Good,
-      activeColor: "#22c55e",
-      inactiveColor: "rgb(20, 83, 45, 0.3)",
-      boxShadowAnimation: [
-        "0 0 0 0 rgba(34, 197, 94, 0)",
-        "0 0 0 20px rgba(34, 197, 94, 0.3)",
-        "0 0 0 0 rgba(34, 197, 94, 0)"
-      ]
-    }
-  ];
-
   return (
     <Flex direction="column" align="center">
       <Flex

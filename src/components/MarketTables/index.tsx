@@ -11,7 +11,7 @@ enum View {
 }
 
 type MarketTablesProps = {
-  assets: any[];
+  assets: CryptoAsset[];
 };
 
 const MarketTables = ({ assets }: MarketTablesProps) => {

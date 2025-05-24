@@ -8,7 +8,7 @@ import {
   Button
 } from "@radix-ui/themes";
 import { ArrowUpRight } from "lucide-react";
-import DayPriceChangeText from "../PriceChangeText";
+import DayPriceChangeText from "@/components/DayPriceChangeText";
 import { CryptoAsset } from "@/commonTypes";
 
 type AllMarketsTableProps = {
