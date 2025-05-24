@@ -1,5 +1,6 @@
 import { Card, Heading, Text, Flex, Box } from "@radix-ui/themes";
 import { TrendingUpDown, ChartColumn, ChartLine, Info } from "lucide-react";
+import MarketStatsCard from "../MarketStatsCard";
 
 export type MarketOverviewCardProps = {
   assets: any[];
@@ -40,72 +41,49 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
           sm: "row"
         }}
       >
-        <Card
-          className="stats-card"
-          mr={{ initial: "initial", sm: "1rem" }}
-          mb={{ initial: "1rem", sm: "initial" }}
+        <MarketStatsCard
+          statName="Average Price Change"
+          value={`${plusSign}${averagePriceChange.toFixed(2)}%`}
         >
-          <Flex align="start" justify="between" width="100%" mb="0.5rem">
-            <Box width="7rem">
-              <Text color="gray">Average Price Change</Text>
-            </Box>
-            <Box
-              width="2rem"
-              height="2rem"
-              p="5px"
-              style={{ borderRadius: "100px", backgroundColor: "#dcfce7" }}
-            >
-              <TrendingUpDown size="1.25rem" color="#16a34a" />
-            </Box>
-          </Flex>
-          <Text weight="bold" size="6">
-            {`${plusSign}${averagePriceChange.toFixed(2)}%`}
-          </Text>
-        </Card>
-        <Card
-          className="stats-card"
-          mr={{ initial: "initial", sm: "1rem" }}
-          mb={{ initial: "1rem", sm: "initial" }}
+          <Box
+            width="2rem"
+            height="2rem"
+            p="5px"
+            style={{ borderRadius: "100px", backgroundColor: "#dcfce7" }}
+          >
+            <TrendingUpDown size="1.25rem" color="#16a34a" />
+          </Box>
+        </MarketStatsCard>
+        <MarketStatsCard
+          statName="Total Market Cap"
+          value={new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            notation: "compact"
+          }).format(Number(totalCap))}
         >
-          <Flex align="start" justify="between" width="100%" mb="0.5rem">
-            <Box width="7rem">
-              <Text color="gray">Total Market Cap</Text>
-            </Box>
-            <Box
-              width="2rem"
-              height="2rem"
-              p="6px"
-              style={{ borderRadius: "100px", backgroundColor: "#dbeafe" }}
-            >
-              <ChartColumn size="1.25rem" color="#2563eb" />
-            </Box>
-          </Flex>
-          <Text weight="bold" size="6">
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              notation: "compact"
-            }).format(Number(totalCap))}
-          </Text>
-        </Card>
-        <Card className="stats-card">
-          <Flex align="start" justify="between" width="100%" mb="0.5rem">
-            <Box width="7rem">
-              <Text color="gray">Price higher than VWAP</Text>
-            </Box>
-            <Box
-              width="2rem"
-              height="2rem"
-              p="6px"
-              style={{ borderRadius: "100px", backgroundColor: "#f3e8ff" }}
-            >
-              <ChartLine size="1.25rem" color="#9333ea" />
-            </Box>
-          </Flex>
-          <Text weight="bold" size="6">
-            {totalCoinsVWAPHigh}/100
-          </Text>
-        </Card>
+          <Box
+            width="2rem"
+            height="2rem"
+            p="6px"
+            style={{ borderRadius: "100px", backgroundColor: "#dbeafe" }}
+          >
+            <ChartColumn size="1.25rem" color="#2563eb" />
+          </Box>
+        </MarketStatsCard>
+        <MarketStatsCard
+          statName="Price higher than VWAP"
+          value={`${totalCoinsVWAPHigh}/100`}
+        >
+          <Box
+            width="2rem"
+            height="2rem"
+            p="6px"
+            style={{ borderRadius: "100px", backgroundColor: "#f3e8ff" }}
+          >
+            <ChartLine size="1.25rem" color="#9333ea" />
+          </Box>
+        </MarketStatsCard>
       </Flex>
       <Card
         mt={{ initial: "1rem", md: "4.1rem" }}

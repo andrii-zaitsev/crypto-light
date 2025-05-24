@@ -14,7 +14,7 @@ import MarketTables from "@/components/MarketTables";
 import MarketSentimentCard from "@/components/MarketSentimentCard";
 import MarketOverviewCard from "@/components/MarketOverviewCard";
 
-const Dashboard = () => {
+const App = () => {
   const { data = [], status } = useQuery({
     queryKey: ["assets"],
     queryFn: getAssets
@@ -84,4 +84,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default App;
