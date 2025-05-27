@@ -11,26 +11,28 @@ type MarketTablesProps = {
 
 const MarketTables = ({ assets }: MarketTablesProps) => {
   const [view, setView] = useState<View>(View.All);
-  const [savedCoins, setSavedCoins] = useState<string[]>(
+  const [watchlist, setWatchlist] = useState<string[]>(
     JSON.parse(localStorage.getItem("watchlist") || "[]")
   );
 
   const addToWatchlist = (assetName: string) =>
-    setSavedCoins((prevCoins) => {
-      const newSavedCoins = [...prevCoins, assetName];
-      localStorage.setItem("watchlist", JSON.stringify(newSavedCoins));
-      return newSavedCoins;
+    setWatchlist((prevWatchlist) => {
+      const newWatchlist = [...prevWatchlist, assetName];
+      localStorage.setItem("watchlist", JSON.stringify(newWatchlist));
+      return newWatchlist;
     });
 
   const removeFromWatchlist = (assetName: string) =>
-    setSavedCoins((prevCoins) => {
-      const newSavedCoins = prevCoins.filter((coin) => coin !== assetName);
-      localStorage.setItem("watchlist", JSON.stringify(newSavedCoins));
-      return newSavedCoins;
+    setWatchlist((prevWatchlist) => {
+      const newWatchlist = prevWatchlist.filter(
+        (watchlistAssetName) => watchlistAssetName !== assetName
+      );
+      localStorage.setItem("watchlist", JSON.stringify(newWatchlist));
+      return newWatchlist;
     });
 
   const watchlistAssets = assets.filter((asset) =>
-    savedCoins.includes(asset.name)
+    watchlist.includes(asset.name)
   );
 
   return (
@@ -45,8 +47,8 @@ const MarketTables = ({ assets }: MarketTablesProps) => {
       />
       {view === View.All && (
         <AllMarketsTable
-          coinsList={assets}
-          watchlist={savedCoins}
+          assets={assets}
+          watchlist={watchlist}
           addToWatchlist={addToWatchlist}
         />
       )}

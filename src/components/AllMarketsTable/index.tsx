@@ -12,13 +12,13 @@ import DayPriceChangeText from "@/components/DayPriceChangeText";
 import { CryptoAsset } from "@/commonTypes";
 
 type AllMarketsTableProps = {
-  coinsList: CryptoAsset[];
+  assets: CryptoAsset[];
   watchlist: string[];
   addToWatchlist: (assetName: string) => void;
 };
 
 const AllMarketsTable = ({
-  coinsList,
+  assets,
   watchlist,
   addToWatchlist
 }: AllMarketsTableProps) => {
@@ -30,7 +30,7 @@ const AllMarketsTable = ({
       <Text as="p" color="gray" mb="0.5rem">
         Market data for Top 100 cryptocurrencies
       </Text>
-      {coinsList.length > 0 ? (
+      {assets.length > 0 ? (
         <Table.Root>
           <Table.Header>
             <Table.Row>
@@ -45,7 +45,7 @@ const AllMarketsTable = ({
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {coinsList.map(
+            {assets.map(
               ({
                 rank,
                 name,
