@@ -12,24 +12,25 @@ type MarketTablesProps = {
 const MarketTables = ({ assets }: MarketTablesProps) => {
   const [view, setView] = useState<View>(View.All);
   const [savedCoins, setSavedCoins] = useState<string[]>(
-    JSON.parse(localStorage.getItem("savedCoins") || "[]")
+    JSON.parse(localStorage.getItem("watchlist") || "[]")
   );
 
-  const saveCoin = (selectedCoin: string) =>
+  const addToWatchlist = (assetName: string) =>
     setSavedCoins((prevCoins) => {
-      const newSavedCoins = [...prevCoins, selectedCoin];
-      localStorage.setItem("savedCoins", JSON.stringify(newSavedCoins));
+      const newSavedCoins = [...prevCoins, assetName];
+      localStorage.setItem("watchlist", JSON.stringify(newSavedCoins));
       return newSavedCoins;
     });
 
-  const removeCoin = (selectedCoin: string) =>
+  const removeFromWatchlist = (assetName: string) =>
     setSavedCoins((prevCoins) => {
-      const newSavedCoins = prevCoins.filter((coin) => coin !== selectedCoin);
-      localStorage.setItem("savedCoins", JSON.stringify(newSavedCoins));
+      const newSavedCoins = prevCoins.filter((coin) => coin !== assetName);
+      localStorage.setItem("watchlist", JSON.stringify(newSavedCoins));
       return newSavedCoins;
     });
 
-  const savedAssets = savedCoins.reduce<CryptoAsset[]>((acc, coinName) => {
+  // refactor
+  const watchlistAssets = savedCoins.reduce<CryptoAsset[]>((acc, coinName) => {
     const asset = assets.find((asset) => asset.name === coinName);
     return asset ? [...acc, asset] : acc;
   }, []);
@@ -47,12 +48,15 @@ const MarketTables = ({ assets }: MarketTablesProps) => {
       {view === View.All && (
         <AllMarketsTable
           coinsList={assets}
-          savedCoins={savedCoins}
-          saveCoin={saveCoin}
+          watchlist={savedCoins}
+          addToWatchlist={addToWatchlist}
         />
       )}
       {view === View.Saved && (
-        <YourWatchlistTable savedCoins={savedAssets} removeCoin={removeCoin} />
+        <YourWatchlistTable
+          watchlistAssets={watchlistAssets}
+          removeFromWatchlist={removeFromWatchlist}
+        />
       )}
     </Box>
   );

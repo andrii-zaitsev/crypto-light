@@ -13,14 +13,14 @@ import { CryptoAsset } from "@/commonTypes";
 
 type AllMarketsTableProps = {
   coinsList: CryptoAsset[];
-  savedCoins: string[];
-  saveCoin: (selectedCoin: string) => void;
+  watchlist: string[];
+  addToWatchlist: (assetName: string) => void;
 };
 
 const AllMarketsTable = ({
   coinsList,
-  savedCoins,
-  saveCoin
+  watchlist,
+  addToWatchlist
 }: AllMarketsTableProps) => {
   return (
     <Card size="3">
@@ -95,10 +95,13 @@ const AllMarketsTable = ({
                     </Flex>
                   </Table.Cell>
                   <Table.Cell align="center">
-                    {savedCoins.includes(name) ? (
+                    {watchlist.includes(name) ? (
                       <Text style={{ fontStyle: "italic" }}>Added</Text>
                     ) : (
-                      <Button variant="ghost" onClick={() => saveCoin(name)}>
+                      <Button
+                        variant="ghost"
+                        onClick={() => addToWatchlist(name)}
+                      >
                         Add to watchlist
                       </Button>
                     )}

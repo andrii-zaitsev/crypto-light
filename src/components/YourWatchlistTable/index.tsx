@@ -12,20 +12,20 @@ import DayPriceChangeText from "@/components/DayPriceChangeText";
 import { CryptoAsset } from "@/commonTypes";
 
 export type YourWatchlistTableProps = {
-  savedCoins: CryptoAsset[];
-  removeCoin: (selectedCoin: string) => void;
+  watchlistAssets: CryptoAsset[];
+  removeFromWatchlist: (selectedCoin: string) => void;
 };
 
 const YourWatchlistTable = ({
-  savedCoins,
-  removeCoin
+  watchlistAssets,
+  removeFromWatchlist
 }: YourWatchlistTableProps) => {
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
         Your Watchlist
       </Heading>
-      {savedCoins.length > 0 ? (
+      {watchlistAssets.length > 0 ? (
         <>
           <Text as="p" color="gray" mb="0.5rem">
             Cryptocurrencies you're tracking. All data saved locally in your
@@ -45,7 +45,7 @@ const YourWatchlistTable = ({
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {savedCoins.map(
+              {watchlistAssets.map(
                 ({
                   rank,
                   name,
@@ -98,7 +98,7 @@ const YourWatchlistTable = ({
                       <Button
                         color="red"
                         variant="ghost"
-                        onClick={() => removeCoin(name)}
+                        onClick={() => removeFromWatchlist(name)}
                       >
                         Remove
                       </Button>
