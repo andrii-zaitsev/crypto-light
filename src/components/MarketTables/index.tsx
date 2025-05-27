@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box } from "@radix-ui/themes";
 import TablesSegmentedControl from "@/components/TablesSegmentedControl";
 import AllMarketsTable from "@/components/AllMarketsTable";
-import YourWatchlistTable from "@/components/YourWatchlistTable";
+import WatchlistTable from "@/components/WatchlistTable";
 import { CryptoAsset, View } from "@/commonTypes";
 
 type MarketTablesProps = {
@@ -53,7 +53,7 @@ const MarketTables = ({ assets }: MarketTablesProps) => {
         />
       )}
       {view === View.Saved && (
-        <YourWatchlistTable
+        <WatchlistTable
           watchlistAssets={watchlistAssets}
           removeFromWatchlist={removeFromWatchlist}
         />

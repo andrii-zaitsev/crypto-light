@@ -11,15 +11,15 @@ import { ArrowUpRight } from "lucide-react";
 import DayPriceChangeText from "@/components/DayPriceChangeText";
 import { CryptoAsset } from "@/commonTypes";
 
-export type YourWatchlistTableProps = {
+export type WatchlistTableProps = {
   watchlistAssets: CryptoAsset[];
   removeFromWatchlist: (selectedCoin: string) => void;
 };
 
-const YourWatchlistTable = ({
+const WatchlistTable = ({
   watchlistAssets,
   removeFromWatchlist
-}: YourWatchlistTableProps) => {
+}: WatchlistTableProps) => {
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
@@ -116,4 +116,4 @@ const YourWatchlistTable = ({
   );
 };
 
-export default YourWatchlistTable;
+export default WatchlistTable;
