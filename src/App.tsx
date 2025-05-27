@@ -60,7 +60,7 @@ const App = () => {
         </Box>
         <MarketOverviewCard assets={assets} />
       </Flex>
-      <MarketTables assets={assets} />
+      <MarketTables topAssets={assets} />
     </Container>
   );
 };

@@ -11,17 +11,17 @@ import { ArrowUpRight } from "lucide-react";
 import DayPriceChangeText from "@/components/DayPriceChangeText";
 import { CryptoAsset } from "@/commonTypes";
 
-type AllMarketsTableProps = {
-  assets: CryptoAsset[];
+type TopAssetsTableProps = {
+  topAssets: CryptoAsset[];
   watchlist: string[];
   addToWatchlist: (assetName: string) => void;
 };
 
-const AllMarketsTable = ({
-  assets,
+const TopAssetsTable = ({
+  topAssets,
   watchlist,
   addToWatchlist
-}: AllMarketsTableProps) => {
+}: TopAssetsTableProps) => {
   return (
     <Card size="3">
       <Heading as="h3" mb="0.5rem">
@@ -30,7 +30,7 @@ const AllMarketsTable = ({
       <Text as="p" color="gray" mb="0.5rem">
         Market data for Top 100 cryptocurrencies
       </Text>
-      {assets.length > 0 ? (
+      {topAssets.length > 0 ? (
         <Table.Root>
           <Table.Header>
             <Table.Row>
@@ -45,7 +45,7 @@ const AllMarketsTable = ({
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {assets.map(
+            {topAssets.map(
               ({
                 rank,
                 name,
@@ -118,4 +118,4 @@ const AllMarketsTable = ({
   );
 };
 
-export default AllMarketsTable;
+export default TopAssetsTable;

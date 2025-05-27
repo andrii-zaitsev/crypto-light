@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Box } from "@radix-ui/themes";
 import TablesSegmentedControl from "@/components/TablesSegmentedControl";
-import AllMarketsTable from "@/components/AllMarketsTable";
+import TopAssetsTable from "@/components/TopAssetsTable";
 import WatchlistTable from "@/components/WatchlistTable";
 import { CryptoAsset, View } from "@/commonTypes";
 
 type MarketTablesProps = {
-  assets: CryptoAsset[];
+  topAssets: CryptoAsset[];
 };
 
-const MarketTables = ({ assets }: MarketTablesProps) => {
+const MarketTables = ({ topAssets }: MarketTablesProps) => {
   const [view, setView] = useState<View>(View.All);
   const [watchlist, setWatchlist] = useState<string[]>(
     JSON.parse(localStorage.getItem("watchlist") || "[]")
@@ -31,7 +31,7 @@ const MarketTables = ({ assets }: MarketTablesProps) => {
       return newWatchlist;
     });
 
-  const watchlistAssets = assets.filter((asset) =>
+  const watchlistAssets = topAssets.filter((asset) =>
     watchlist.includes(asset.name)
   );
 
@@ -46,8 +46,8 @@ const MarketTables = ({ assets }: MarketTablesProps) => {
         onValueChange={(newView) => setView(newView)}
       />
       {view === View.All && (
-        <AllMarketsTable
-          assets={assets}
+        <TopAssetsTable
+          topAssets={topAssets}
           watchlist={watchlist}
           addToWatchlist={addToWatchlist}
         />
