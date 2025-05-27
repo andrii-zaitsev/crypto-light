@@ -29,11 +29,9 @@ const MarketTables = ({ assets }: MarketTablesProps) => {
       return newSavedCoins;
     });
 
-  // refactor
-  const watchlistAssets = savedCoins.reduce<CryptoAsset[]>((acc, coinName) => {
-    const asset = assets.find((asset) => asset.name === coinName);
-    return asset ? [...acc, asset] : acc;
-  }, []);
+  const watchlistAssets = assets.filter((asset) =>
+    savedCoins.includes(asset.name)
+  );
 
   return (
     <Box mb="2rem">
