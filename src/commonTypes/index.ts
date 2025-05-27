@@ -20,6 +20,6 @@ export type CryptoAsset = {
 };
 
 export enum View {
-  All = "All",
-  Saved = "Saved"
+  TopAssets = "TopAssets",
+  Watchlist = "Watchlist"
 }

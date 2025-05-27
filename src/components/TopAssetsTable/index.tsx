@@ -28,7 +28,7 @@ const TopAssetsTable = ({
         Top Cryptocurrencies
       </Heading>
       <Text as="p" color="gray" mb="0.5rem">
-        Market data for Top 100 cryptocurrencies
+        Market data for Top 100 cryptocurrencies.
       </Text>
       {topAssets.length > 0 ? (
         <Table.Root>

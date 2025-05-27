@@ -10,7 +10,7 @@ type MarketTablesProps = {
 };
 
 const MarketTables = ({ topAssets }: MarketTablesProps) => {
-  const [view, setView] = useState<View>(View.All);
+  const [view, setView] = useState<View>(View.TopAssets);
   const [watchlist, setWatchlist] = useState<string[]>(
     JSON.parse(localStorage.getItem("watchlist") || "[]")
   );
@@ -40,19 +40,19 @@ const MarketTables = ({ topAssets }: MarketTablesProps) => {
       <TablesSegmentedControl
         value={view}
         options={[
-          { value: View.All, label: "All Markets" },
-          { value: View.Saved, label: "Your Watchlist" }
+          { value: View.TopAssets, label: "Top Assets" },
+          { value: View.Watchlist, label: "Your Watchlist" }
         ]}
         onValueChange={(newView) => setView(newView)}
       />
-      {view === View.All && (
+      {view === View.TopAssets && (
         <TopAssetsTable
           topAssets={topAssets}
           watchlist={watchlist}
           addToWatchlist={addToWatchlist}
         />
       )}
-      {view === View.Saved && (
+      {view === View.Watchlist && (
         <WatchlistTable
           watchlistAssets={watchlistAssets}
           removeFromWatchlist={removeFromWatchlist}
