@@ -4,11 +4,11 @@ import MarketStatsCard from "./MarketStatsCard";
 import { CryptoAsset } from "@/commonTypes";
 
 export type MarketOverviewCardProps = {
-  assets: CryptoAsset[];
+  topAssets: CryptoAsset[];
 };
 
-const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
-  const { totalPriceChange, totalCap, totalCoinsVWAPHigh } = assets.reduce(
+const MarketOverviewCard = ({ topAssets }: MarketOverviewCardProps) => {
+  const { totalPriceChange, totalCap, totalCoinsVWAPHigh } = topAssets.reduce(
     (acc, current) => {
       const vwapHigh =
         Number(current.priceUsd) > Number(current.vwap24Hr) ? 1 : 0;
@@ -23,7 +23,7 @@ const MarketOverviewCard = ({ assets }: MarketOverviewCardProps) => {
     { totalPriceChange: 0, totalCap: 0, totalCoinsVWAPHigh: 0 }
   );
 
-  const averagePriceChange = totalPriceChange / assets.length;
+  const averagePriceChange = totalPriceChange / topAssets.length;
   const plusSign =
     Math.abs(averagePriceChange) === averagePriceChange ? "+" : "";
 
