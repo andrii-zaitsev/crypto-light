@@ -18,3 +18,8 @@ export type CryptoAsset = {
   vwap24Hr: string;
   explorer: string;
 };
+
+export enum View {
+  All = "All",
+  Saved = "Saved"
+}

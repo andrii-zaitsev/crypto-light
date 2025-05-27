@@ -3,12 +3,7 @@ import { Box } from "@radix-ui/themes";
 import TablesSegmentedControl from "@/components/TablesSegmentedControl";
 import AllMarketsTable from "@/components/AllMarketsTable";
 import YourWatchlistTable from "@/components/YourWatchlistTable";
-import { CryptoAsset } from "@/commonTypes";
-
-enum View {
-  All = "All",
-  Saved = "Saved"
-}
+import { CryptoAsset, View } from "@/commonTypes";
 
 type MarketTablesProps = {
   assets: CryptoAsset[];
@@ -47,7 +42,7 @@ const MarketTables = ({ assets }: MarketTablesProps) => {
           { value: View.All, label: "All Markets" },
           { value: View.Saved, label: "Your Watchlist" }
         ]}
-        onValueChange={(newView) => setView(newView as View)}
+        onValueChange={(newView) => setView(newView)}
       />
       {view === View.All && (
         <AllMarketsTable

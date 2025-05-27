@@ -1,9 +1,10 @@
 import { SegmentedControl } from "@radix-ui/themes";
+import { View } from "@/commonTypes";
 
 export type TablesSegmentedControlProps = {
   options: { value: string; label: string }[];
   value: string;
-  onValueChange: (newValue: unknown) => void;
+  onValueChange: (newValue: View) => void;
 };
 
 const TablesSegmentedControl = ({
