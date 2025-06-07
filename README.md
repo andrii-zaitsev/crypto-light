@@ -25,10 +25,13 @@ The app is open to everyone—no sign-up required.
 - Browse the Top 100 cryptocurrencies
 - View your customized watchlist anytime
 - Get quick access to key crypto market metrics
+- Instant notification if you lose internet connection
 
 ### Some screenshots
 
 #### 🔴 light
+
+<img src="./screenshots/CryptoLight-bad.png" />
 
 #### 🟡 light
 
@@ -40,51 +43,28 @@ The app is open to everyone—no sign-up required.
 
 You can run project locally.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Clone this repository then `cd tickers-and-coins`
+2. Install dependencies (e.g `npm install`)
+3. Obtain api key for API https://pro.coincap.io/api-docs/
+4. Create `.env` file with following content `VITE_API_KEY=<your api key>`
+5. Run app by `npm run dev`
 
-Currently, two official plugins are available:
+### How it works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Some quick facts:
 
-## Expanding the ESLint configuration
+- It uses [CoinCap API](https://pro.coincap.io/api-docs/) to fetch the latest market data.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- The watchlist is saved in localStorage, so it sticks around even after you close the app.
 
-- Configure the top-level `parserOptions` property like this:
+- The logic for computing market sentiment resides in the `MarketSentimentCard` component.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname
-    }
-  }
-});
-```
+### Contribute
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+All contributions are welcome — big or small.
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+### Support
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules
-  }
-});
-```
+Got any issues? Just open one in the project and give me a heads-up.
+
+### License
