@@ -39,7 +39,7 @@ The app is open to everyone—no sign-up required.
 
 #### 🟢 light
 
-### Usage
+## Usage
 
 You can run project locally.
 
@@ -49,7 +49,7 @@ You can run project locally.
 4. Create `.env` file with following content `VITE_API_KEY=<your api key>`
 5. Run app by `npm run dev`
 
-### How it works
+## How it works
 
 Some quick facts:
 
@@ -59,14 +59,14 @@ Some quick facts:
 
 - The logic for computing market sentiment resides in the `MarketSentimentCard` component.
 
-### Contribute
+## Contribute
 
 All contributions are welcome — big or small.
 
-### Support
+## Support
 
 Got any issues? Just open one in the project and give me a heads-up.
 
-### License
+## License
 
 This project is licensed under the MIT License – see the [LICENSE](./LICENSE) file for details.
