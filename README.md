@@ -39,6 +39,8 @@ The app is open to everyone—no sign-up required.
 
 #### 🟢 light
 
+<img src="./screenshots/CryptoLight-good.png" />
+
 ## Usage
 
 You can run project locally.
